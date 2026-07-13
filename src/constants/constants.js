@@ -168,6 +168,7 @@ export const NAV_ITEMS = [
         links: [
           { title: "Become Member", href: "/membership#become-member" },
           { title: "Benefits", href: "/membership#benefits" },
+          { title: "Membership Guidelines", href: "/membership#guidelines" },
         ],
       },
     ],

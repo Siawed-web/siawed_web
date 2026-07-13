@@ -34,9 +34,14 @@ const initialFormState = {
   business_goals: "",
   mentor_years_exp: "",
   mentor_commitment: "",
+  mentor_commitment_other: "",
   community_participation: [],
+  community_participation_other: "",
   referral_source: "",
-  consent_agreed: false,
+  referral_source_other: "",
+  declaration_guidelines: false,
+  declaration_values: false,
+  declaration_communications: false,
   consent_name: "",
   consent_place: "",
   consent_date: ""
@@ -76,11 +81,11 @@ const JoinForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
-      if (name === "consent_agreed") {
+      if (name.startsWith("declaration_") || name === "consent_agreed") {
         setFormData({ ...formData, [name]: checked });
       } else {
         // Handle array fields (support_needs, key_skills, mentor_areas, community_participation)
-        const arrayField = formData[name];
+        const arrayField = formData[name] || [];
         if (checked) {
           setFormData({ ...formData, [name]: [...arrayField, value] });
         } else {
@@ -254,6 +259,16 @@ const JoinForm = () => {
                       <option value="Working Professional">Working Professional</option>
                       <option value="Other">Other</option>
                     </Form.Select>
+                    {formData.current_occupation === "Other" && (
+                      <Form.Control 
+                        type="text" 
+                        name="current_occupation_other" 
+                        placeholder="Please specify" 
+                        className="mt-2"
+                        value={formData.current_occupation_other || ""} 
+                        onChange={handleChange} 
+                      />
+                    )}
                   </Form.Group>
                 </Col>
               </Row>
@@ -323,6 +338,16 @@ const JoinForm = () => {
                         <option value="CEO">CEO</option>
                         <option value="Other">Other</option>
                       </Form.Select>
+                      {formData.business_role === "Other" && (
+                        <Form.Control 
+                          type="text" 
+                          name="business_role_other" 
+                          placeholder="Please specify" 
+                          className="mt-2"
+                          value={formData.business_role_other || ""} 
+                          onChange={handleChange} 
+                        />
+                      )}
                     </Form.Group>
                   </Col>
                 </Row>
@@ -335,16 +360,27 @@ const JoinForm = () => {
               <Form.Group className="mb-3">
                 <Form.Label>What kind of support are you looking for?</Form.Label>
                 <div className={styles.checkGroup}>
-                  {['Business mentoring', 'Marketing support', 'Digital marketing', 'Branding', 'Financial planning', 'Networking opportunities', 'Market access', 'Investor connections'].map(item => (
-                    <Form.Check 
-                      key={item}
-                      type="checkbox" 
-                      label={item} 
-                      name="support_needs" 
-                      value={item} 
-                      onChange={handleChange}
-                      checked={formData.support_needs.includes(item)}
-                    />
+                  {['Business mentoring', 'Marketing support', 'Digital marketing', 'Branding', 'Financial planning', 'Networking opportunities', 'Market access', 'Investor connections', 'Other'].map(item => (
+                    <div key={item}>
+                      <Form.Check 
+                        type="checkbox" 
+                        label={item} 
+                        name="support_needs" 
+                        value={item} 
+                        onChange={handleChange}
+                        checked={formData.support_needs.includes(item)}
+                      />
+                      {item === 'Other' && formData.support_needs.includes('Other') && (
+                        <Form.Control 
+                          type="text" 
+                          name="support_needs_other" 
+                          placeholder="Please specify" 
+                          className="mt-2 ms-4 w-auto"
+                          value={formData.support_needs_other || ""} 
+                          onChange={handleChange} 
+                        />
+                      )}
+                    </div>
                   ))}
                 </div>
               </Form.Group>
@@ -356,16 +392,27 @@ const JoinForm = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Your Key Skills *</Form.Label>
                 <div className={styles.checkGroup}>
-                  {['Sales', 'Marketing', 'Product development', 'Finance', 'Digital marketing'].map(item => (
-                    <Form.Check 
-                      key={item}
-                      type="checkbox" 
-                      label={item} 
-                      name="key_skills" 
-                      value={item} 
-                      onChange={handleChange}
-                      checked={formData.key_skills.includes(item)}
-                    />
+                  {['Sales', 'Marketing', 'Product development', 'Finance', 'Digital marketing', 'Other'].map(item => (
+                    <div key={item}>
+                      <Form.Check 
+                        type="checkbox" 
+                        label={item} 
+                        name="key_skills" 
+                        value={item} 
+                        onChange={handleChange}
+                        checked={formData.key_skills.includes(item)}
+                      />
+                      {item === 'Other' && formData.key_skills.includes('Other') && (
+                        <Form.Control 
+                          type="text" 
+                          name="key_skills_other" 
+                          placeholder="Please specify" 
+                          className="mt-2 ms-4 w-auto"
+                          value={formData.key_skills_other || ""} 
+                          onChange={handleChange} 
+                        />
+                      )}
+                    </div>
                   ))}
                 </div>
               </Form.Group>
@@ -402,7 +449,18 @@ const JoinForm = () => {
                   <div>
                     <Form.Check inline type="radio" label="Yes" name="mentor_commitment" value="Yes" onChange={handleChange} checked={formData.mentor_commitment === "Yes"} />
                     <Form.Check inline type="radio" label="No" name="mentor_commitment" value="No" onChange={handleChange} checked={formData.mentor_commitment === "No"} />
+                    <Form.Check inline type="radio" label="Other" name="mentor_commitment" value="Other" onChange={handleChange} checked={formData.mentor_commitment === "Other"} />
                   </div>
+                  {formData.mentor_commitment === "Other" && (
+                    <Form.Control 
+                      type="text" 
+                      name="mentor_commitment_other" 
+                      placeholder="Please specify" 
+                      className="mt-2"
+                      value={formData.mentor_commitment_other || ""} 
+                      onChange={handleChange} 
+                    />
+                  )}
                 </Form.Group>
               </div>
             )}
@@ -413,16 +471,27 @@ const JoinForm = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Would you like to: *</Form.Label>
                 <div className={styles.checkGroup}>
-                  {['Volunteer for SIAWED programs', 'Speak at events', 'Mentor aspiring entrepreneurs', 'Support networking initiatives'].map(item => (
-                    <Form.Check 
-                      key={item}
-                      type="checkbox" 
-                      label={item} 
-                      name="community_participation" 
-                      value={item} 
-                      onChange={handleChange}
-                      checked={formData.community_participation.includes(item)}
-                    />
+                  {['Volunteer for SIAWED programs', 'Speak at events', 'Mentor aspiring entrepreneurs', 'Support networking initiatives', 'Other'].map(item => (
+                    <div key={item}>
+                      <Form.Check 
+                        type="checkbox" 
+                        label={item} 
+                        name="community_participation" 
+                        value={item} 
+                        onChange={handleChange}
+                        checked={formData.community_participation.includes(item)}
+                      />
+                      {item === 'Other' && formData.community_participation.includes('Other') && (
+                        <Form.Control 
+                          type="text" 
+                          name="community_participation_other" 
+                          placeholder="Please specify" 
+                          className="mt-2 ms-4 w-auto"
+                          value={formData.community_participation_other || ""} 
+                          onChange={handleChange} 
+                        />
+                      )}
+                    </div>
                   ))}
                 </div>
               </Form.Group>
@@ -440,23 +509,61 @@ const JoinForm = () => {
                   <option value="Event / workshop">Event / workshop</option>
                   <option value="College program">College program</option>
                   <option value="Website">Website</option>
+                  <option value="Other">Other</option>
                 </Form.Select>
+                {formData.referral_source === "Other" && (
+                  <Form.Control 
+                    type="text" 
+                    name="referral_source_other" 
+                    placeholder="Please specify" 
+                    className="mt-2"
+                    value={formData.referral_source_other || ""} 
+                    onChange={handleChange} 
+                  />
+                )}
               </Form.Group>
             </div>
 
-            {/* SECTION 12: Consent */}
+            {/* SECTION 12: Declaration */}
             <div className={styles.formSection}>
-              <h3>Section 12: Consent</h3>
-              <Form.Group className="mb-4">
+              <h3>Section 12: Declaration</h3>
+              <p>By applying for membership, I confirm that:</p>
+              
+              <Form.Group className="mb-2">
                 <Form.Check 
                   type="checkbox" 
-                  label="I agree to become a member of SIAWED and participate in its community programs. I also confirm that I will follow all rules and regulations. *" 
-                  name="consent_agreed" 
-                  checked={formData.consent_agreed}
+                  label="I have read and understood the Membership Guidelines. *" 
+                  name="declaration_guidelines" 
+                  checked={formData.declaration_guidelines}
                   onChange={handleChange}
                   required 
                 />
               </Form.Group>
+              <Form.Group className="mb-2">
+                <Form.Check 
+                  type="checkbox" 
+                  label="I agree to abide by the values, objectives and policies of SIAWED. *" 
+                  name="declaration_values" 
+                  checked={formData.declaration_values}
+                  onChange={handleChange}
+                  required 
+                />
+              </Form.Group>
+              <Form.Group className="mb-4">
+                <Form.Check 
+                  type="checkbox" 
+                  label="I consent to receive official communications from SIAWED regarding programmes, events and membership activities. *" 
+                  name="declaration_communications" 
+                  checked={formData.declaration_communications}
+                  onChange={handleChange}
+                  required 
+                />
+              </Form.Group>
+              
+              <div className="mb-4 p-3" style={{ backgroundColor: '#f8f9fa', borderLeft: '4px solid #f97316', fontStyle: 'italic', color: '#4b5563' }}>
+                “At SIAWED, we believe that when women support women, communities prosper. Every member is encouraged to learn, lead, mentor and inspire, contributing towards a stronger and more inclusive entrepreneurial ecosystem.”
+              </div>
+
               <Row>
                 <Col md={4}>
                   <Form.Group className="mb-3">

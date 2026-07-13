@@ -113,6 +113,7 @@ const MOBILE_PAGES = [
     dropdown: [
       { title: "Member benefits", href: "/memberships#benefits" },
       { title: "Membership plans", href: "/memberships#plans" },
+      { title: "Membership Guidelines", href: "/membership#guidelines" },
       { title: "Become a member", href: "/memberships/apply" },
     ]
   },

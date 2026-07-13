@@ -4,10 +4,87 @@
      ============================================================ */
   .membershipGrid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
     margin-top: 48px;
     align-items: stretch;
+  }
+
+  .corporateRow {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    width: 100%;
+
+    .planCard {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .corporateCardFullWidth {
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 45px 50px;
+    gap: 50px;
+
+    .corpHeader {
+      flex: 0 0 320px;
+      text-align: left;
+
+      .planCardBadge {
+        display: inline-block;
+        margin-bottom: 12px;
+      }
+      h3 {
+        font-size: 24px !important;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+      .planCardTagline {
+        margin-bottom: 0;
+        font-size: 14px;
+      }
+    }
+
+    .corpFeatures {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 24px;
+      margin-bottom: 0;
+
+      li {
+        font-size: 13px;
+      }
+    }
+
+    .corpAction {
+      flex: 0 0 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      border-left: 2px solid rgba(0, 0, 0, 0.05);
+      padding-left: 50px;
+
+      .planCardPrice {
+        font-size: 38px;
+        margin-bottom: 4px;
+      }
+      .planCardPeriod {
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+
+      a {
+        /* Target the custom button */
+        width: 100%;
+        text-align: center;
+      }
+    }
   }
 
   .planCard {
@@ -102,9 +179,11 @@
     gap: 9px;
     flex: 1;
     margin-bottom: 20px;
+
+    padding: 0;
   }
   .planCardFeatures li {
-    font-size: 12.5px;
+    font-size: 14px;
     color: $slate;
     display: flex;
     align-items: flex-start;
@@ -139,10 +218,41 @@
     .membershipGrid {
       grid-template-columns: repeat(3, 1fr);
     }
+    .corporateCardFullWidth .corpFeatures {
+      grid-template-columns: 1fr;
+    }
   }
   @media (max-width: 768px) {
     .membershipGrid {
       grid-template-columns: 1fr;
+    }
+    .corporateCardFullWidth {
+      flex-direction: column !important;
+      gap: 0;
+      text-align: center;
+      padding: 26px 20px;
+
+      .corpHeader,
+      .corpAction,
+      .corpFeatures {
+        min-width: 100%;
+        flex: 1 1 100%;
+        width: 100%;
+      }
+      .corpAction {
+        border-left: none;
+        border-top: 2px solid rgba(0, 0, 0, 0.05);
+        padding-left: 0;
+        padding-top: 24px;
+        margin-top: 24px;
+        align-items: center;
+        text-align: center;
+      }
+      .corpFeatures {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: 1fr;
+      }
     }
   }
 }
