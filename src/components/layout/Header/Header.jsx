@@ -5,7 +5,11 @@ import Link from "next/link";
 import styles from "./Header.module.scss";
 import { 
   GeoAltFill, TelephoneFill, EnvelopeFill, Globe, 
-  ChevronDown, HeartFill, House, Gear, Briefcase, People, List, Whatsapp, Download
+  ChevronDown, HeartFill, House, Gear, Briefcase, People, List, Whatsapp, Download,
+  CalendarDate,
+  Calendar2Date,
+  Calendar2,
+  Calendar
 } from "react-bootstrap-icons";
 import { Image } from "react-bootstrap";
 import CustomButton from "@/components/ui/custom_button/custom_button";
@@ -203,9 +207,9 @@ const Header = () => {
             </Link>
           </li>
           <li className={styles.bottomTabsItem}>
-            <Link href="/programs" className={styles.bottomTab}>
-              <span className={styles.bottomTabIcon}><Gear /></span>
-              Programs
+            <Link href="/events" className={styles.bottomTab}>
+              <span className={styles.bottomTabIcon}><Calendar /></span>
+              Events
             </Link>
           </li>
           <li className={styles.bottomTabsItem}>

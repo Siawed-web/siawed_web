@@ -31,8 +31,8 @@ const HomeScreen = () => {
         rel="noopener noreferrer"
         style={{
           position: 'fixed',
-          bottom: '30px',
-          right: '30px',
+          bottom: '70px',
+          right: '20px',
           zIndex: 9999,
           backgroundColor: '#25D366',
           color: 'white',
