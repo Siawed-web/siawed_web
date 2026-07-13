@@ -1,0 +1,74 @@
+.impactContainer {
+  /* ============================================================
+     11. IMPACT STATS BAND
+     ============================================================ */
+  /* Override default section padding for impact band */
+
+  .impactWrapper {
+    padding: 0;
+  }
+
+  .impactGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: $r;
+    overflow: hidden;
+  }
+
+  .impactCell {
+    padding: 36px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .impactCell:last-child {
+    border-right: none;
+  }
+
+  .impactCellNumber {
+    display: block;
+
+    font-size: 46px;
+    font-weight: 800;
+    color: $orange-mid;
+    line-height: 1;
+  }
+  .impactCellLabel {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.42);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .impactGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .impactCell:nth-child(3) {
+      border-right: none;
+    }
+    .impactCell:nth-child(n + 4) {
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .impactGrid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .impactCell:nth-child(2) {
+      border-right: none;
+    }
+    .impactCell:nth-child(3) {
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .impactCell:nth-child(5) {
+      grid-column: 1/-1;
+      border-right: none;
+    }
+  }
+}

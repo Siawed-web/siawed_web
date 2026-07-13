@@ -1,0 +1,86 @@
+.wwdContainer {
+  /* ============================================================
+     13. WHAT WE DO SECTION
+     ============================================================ */
+  .wwdGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 46px;
+  }
+
+  .wwdCard {
+    background: $white;
+    border: 1.5px solid $mist;
+    border-radius: $r;
+    padding: 30px;
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+  }
+  .wwdCard:hover {
+    box-shadow: $sh-md;
+    transform: translateY(-3px);
+  }
+
+  .wwdCardIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+  .iconBgBlue {
+    background: $blue-light;
+  }
+  .iconBgOrange {
+    background: $orange-light;
+  }
+  .iconBgGreen {
+    background: $green-light;
+  }
+  .iconBgTeal {
+    background: $teal-light;
+  }
+
+  .wwdCard h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: $charcoal;
+    margin-bottom: 10px;
+  }
+  .wwdCard p {
+    font-size: 13.5px;
+    line-height: 1.78;
+    color: $slate;
+  }
+
+  /* Featured card (dark bg) */
+  .wwdCardFeatured {
+    background: $blue;
+    border-color: $blue;
+  }
+  .wwdCardFeatured h3 {
+    color: #fff;
+  }
+  .wwdCardFeatured p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .wwdCardFeatured .wwdCardIcon {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 900px) {
+    .wwdGrid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .wwdGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,0 +1,148 @@
+.membershipContainer {
+  /* ============================================================
+     16. MEMBERSHIP SECTION
+     ============================================================ */
+  .membershipGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 48px;
+    align-items: stretch;
+  }
+
+  .planCard {
+    background: $white;
+    border: 1.5px solid $mist;
+    border-radius: $r;
+    padding: 26px 20px;
+    display: flex;
+    flex-direction: column;
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+  }
+  .planCard:hover {
+    box-shadow: $sh-md;
+    transform: translateY(-4px);
+  }
+
+  /* Popular (blue) plan */
+  .planCardFeatured {
+    background: $blue;
+    border-color: $blue;
+  }
+
+  .planCardBadge {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $orange;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .planCardFeatured .planCardBadge {
+    color: $orange-mid;
+  }
+
+  .planCard h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: $charcoal;
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+  .planCardFeatured h3 {
+    color: #fff;
+  }
+
+  .planCardTagline {
+    font-size: 12px;
+    color: $slate;
+    margin-bottom: 16px;
+    font-style: italic;
+    line-height: 1.45;
+  }
+  .planCardFeatured .planCardTagline {
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .planCardPrice {
+    font-size: 32px;
+    font-weight: 800;
+    color: $blue;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .planCardFeatured .planCardPrice {
+    color: $orange-mid;
+  }
+
+  .planCardPeriod {
+    font-size: 11px;
+    color: $slate;
+    margin-bottom: 16px;
+  }
+  .planCardFeatured .planCardPeriod {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .planCardDivider {
+    border: none;
+    border-top: 1px solid $mist;
+    margin: 12px 0;
+  }
+  .planCardFeatured .planCardDivider {
+    border-top-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .planCardFeatures {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+  .planCardFeatures li {
+    font-size: 12.5px;
+    color: $slate;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .planCardFeatures li::before {
+    content: "✓";
+    color: $blue;
+    font-weight: 800;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .planCardFeatured .planCardFeatures li {
+    color: rgba(255, 255, 255, 0.84);
+  }
+  .planCardFeatured .planCardFeatures li::before {
+    color: $orange-mid;
+  }
+
+  /* Teal plan */
+  .planCardTeal .planCardBadge {
+    color: $teal;
+  }
+  .planCardTeal .planCardPrice {
+    color: $teal;
+    font-size: 26px;
+  }
+
+  @media (max-width: 1100px) {
+    .membershipGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .membershipGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

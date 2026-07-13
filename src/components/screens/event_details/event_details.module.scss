@@ -1,0 +1,108 @@
+@import "@/styles/scss/_variables.scss";
+@import "@/styles/scss/_mixins.scss";
+
+.detailsPage {
+  padding: 0 0 60px 0;
+  background-color: $ivory;
+  font-family: var(--font-primary, sans-serif);
+  color: $slate;
+
+  .contentWrapper {
+    margin-top: -40px; /* Pull it slightly over the banner if we want, or just leave it flush */
+    position: relative;
+    z-index: 2;
+  }
+
+  .detailsCard {
+    @include defaultBox;
+    background: $white;
+    padding: 50px;
+    border-radius: $r;
+    box-shadow: $sh-md;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .eventHeader {
+      border-bottom: 1px solid $mist;
+      padding-bottom: 20px;
+      margin-bottom: 10px;
+
+      .eventDate {
+        display: inline-block;
+        background: rgba(232, 112, 26, 0.1); /* Light orange */
+        color: $orange;
+        padding: 8px 20px;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+
+      .eventTitle {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: $blue-deep;
+        line-height: 1.3;
+      }
+    }
+
+    .eventImage {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: $r;
+      box-shadow: $sh-sm;
+    }
+
+    .eventDescription {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: $slate;
+      
+      p {
+        margin-bottom: 20px;
+      }
+    }
+
+    .actionSection {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+  }
+
+  .notFoundState {
+    padding: 100px 0;
+    text-align: center;
+
+    h2 {
+      font-size: 2rem;
+      color: $blue-deep;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: $slate;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .detailsPage {
+    .detailsCard {
+      padding: 30px 20px;
+
+      .eventHeader {
+        .eventTitle {
+          font-size: 1.8rem;
+        }
+      }
+
+      .eventImage {
+        height: 250px;
+      }
+    }
+  }
+}

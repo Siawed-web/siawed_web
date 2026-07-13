@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SIAWED – Membership Policies</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --blue: #1a6fa8;
+        --blue-deep: #0e4d7a;
+        --blue-light: #eaf4fb;
+        --orange: #e8701a;
+        --orange-light: #fef3e7;
+        --teal: #0d7a6e;
+        --teal-light: #e0f5f2;
+        --ivory: #f9f7f3;
+        --parchment: #f1ebe0;
+        --mist: #e2d9ce;
+        --charcoal: #1c1c1c;
+        --slate: #4a4a4a;
+        --white: #fff;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Nunito Sans", sans-serif;
+        background: var(--ivory);
+        color: var(--charcoal);
+        line-height: 1.6;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ── TOPBAR ── */
+      .topbar {
+        background: var(--blue-deep);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 6px 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .topbar a {
+        color: rgba(255, 255, 255, 0.75);
+      }
+      @media (max-width: 768px) {
+        .topbar {
+          display: none;
+        }
+      }
+
+      /* ── NAV ── */
+      .nav {
+        background: var(--white);
+        border-bottom: 2px solid var(--mist);
+        padding: 0 52px;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-logo img {
+        height: 50px;
+        width: auto;
+      }
+      .nav-back {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--blue);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      @media (max-width: 600px) {
+        .nav {
+          padding: 0 18px;
+        }
+      }
+
+      /* ── PAGE HERO ── */
+      .page-hero {
+        background: var(--blue-deep);
+        padding: 56px 52px 52px;
+        text-align: center;
+      }
+      .page-hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 48px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 14px;
+      }
+      .page-hero p {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.72);
+        max-width: 580px;
+        margin: 0 auto 24px;
+      }
+      .doc-badges {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .doc-badge {
+        padding: 7px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        transition: all 0.2s;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .doc-badge:hover,
+      .doc-badge.active {
+        background: var(--orange);
+        border-color: var(--orange);
+        color: #fff;
+      }
+
+      /* ── TAB CONTENT ── */
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      /* ── LAYOUT ── */
+      .page-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 56px 40px 80px;
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .page-wrap {
+          grid-template-columns: 1fr;
+          padding: 40px 22px 60px;
+        }
+      }
+
+      /* ── SIDEBAR TOC ── */
+      .toc {
+        position: sticky;
+        top: 88px;
+        background: var(--white);
+        border: 1px solid var(--mist);
+        border-radius: 10px;
+        padding: 20px;
+        font-size: 13px;
+      }
+      .toc-title {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--orange);
+        margin-bottom: 14px;
+      }
+      .toc ol {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .toc ol li a {
+        color: var(--slate);
+        font-weight: 600;
+        transition: color 0.15s;
+        display: block;
+        padding: 3px 0 3px 10px;
+        border-left: 2px solid transparent;
+        font-size: 12.5px;
+      }
+      .toc ol li a:hover {
+        color: var(--blue);
+        border-left-color: var(--blue);
+        text-decoration: none;
+      }
+      .toc-eff {
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid var(--mist);
+        font-size: 11.5px;
+        color: var(--slate);
+      }
+      .toc-eff strong {
+        color: var(--charcoal);
+        display: block;
+        margin-bottom: 3px;
+      }
+      @media (max-width: 900px) {
+        .toc {
+          display: none;
+        }
+      }
+
+      /* ── DOCUMENT BODY ── */
+      .doc {
+        background: var(--white);
+        border: 1px solid var(--mist);
+        border-radius: 10px;
+        padding: 48px 52px;
+      }
+      @media (max-width: 600px) {
+        .doc {
+          padding: 28px 22px;
+        }
+      }
+
+      .doc-intro {
+        background: var(--blue-light);
+        border-left: 4px solid var(--blue);
+        border-radius: 0 8px 8px 0;
+        padding: 16px 20px;
+        margin-bottom: 36px;
+        font-size: 14px;
+        color: var(--slate);
+        line-height: 1.75;
+      }
+      .doc-intro strong {
+        color: var(--blue);
+      }
+
+      /* Section */
+      .doc-section {
+        margin-bottom: 40px;
+        scroll-margin-top: 100px;
+      }
+      .doc-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .doc-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--mist);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .doc-section h2 .sec-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        font-family: "Nunito Sans", sans-serif;
+        flex-shrink: 0;
+      }
+
+      .doc-section h3 {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--charcoal);
+        margin: 22px 0 10px;
+      }
+      .doc-section p {
+        font-size: 14px;
+        line-height: 1.82;
+        color: var(--slate);
+        margin-bottom: 14px;
+      }
+      .doc-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Lists */
+      .doc-section ul,
+      .doc-section ol {
+        padding-left: 0;
+        margin: 10px 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .doc-section ul li,
+      .doc-section ol li {
+        font-size: 14px;
+        line-height: 1.75;
+        color: var(--slate);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .doc-section ul li::before {
+        content: "•";
+        color: var(--blue);
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .doc-section ol {
+        counter-reset: ol-counter;
+        list-style: none;
+      }
+      .doc-section ol li {
+        counter-increment: ol-counter;
+      }
+      .doc-section ol li::before {
+        content: counter(ol-counter) ".";
+        color: var(--blue);
+        font-weight: 800;
+        font-size: 13px;
+        flex-shrink: 0;
+        min-width: 20px;
+      }
+
+      /* Table */
+      .policy-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0 20px;
+        font-size: 13.5px;
+      }
+      .policy-table th {
+        background: var(--blue);
+        color: #fff;
+        padding: 11px 14px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .policy-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--mist);
+        color: var(--slate);
+        vertical-align: top;
+      }
+      .policy-table tr:nth-child(even) td {
+        background: var(--ivory);
+      }
+      .policy-table .tag {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .tag-yes {
+        background: var(--teal-light);
+        color: var(--teal);
+      }
+      .tag-no {
+        background: #fde8e8;
+        color: #c0392b;
+      }
+      .tag-partial {
+        background: var(--orange-light);
+        color: var(--orange);
+      }
+
+      /* Highlight box */
+      .highlight-box {
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin: 18px 0;
+        font-size: 13.5px;
+        line-height: 1.75;
+      }
+      .hb-blue {
+        background: var(--blue-light);
+        border-left: 4px solid var(--blue);
+      }
+      .hb-orange {
+        background: var(--orange-light);
+        border-left: 4px solid var(--orange);
+      }
+      .hb-teal {
+        background: var(--teal-light);
+        border-left: 4px solid var(--teal);
+      }
+      .hb-warn {
+        background: #fff8e1;
+        border-left: 4px solid #f0a500;
+      }
+      .highlight-box strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+        opacity: 0.7;
+      }
+
+      /* Contact block */
+      .contact-block {
+        background: var(--parchment);
+        border: 1px solid var(--mist);
+        border-radius: 8px;
+        padding: 20px 24px;
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      .contact-block h4 {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--charcoal);
+        margin-bottom: 12px;
+      }
+      .contact-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: var(--slate);
+      }
+      .contact-row .ci {
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* Signature block */
+      .sig-block {
+        margin-top: 48px;
+        padding-top: 28px;
+        border-top: 2px solid var(--mist);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .sig-left {
+        font-size: 13px;
+        color: var(--slate);
+        line-height: 1.7;
+      }
+      .sig-left strong {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--charcoal);
+        display: block;
+        margin-bottom: 3px;
+      }
+      .sig-right {
+        text-align: right;
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .sig-right .rev-date {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--orange);
+      }
+
+      /* Print button */
+      .print-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.18s;
+        font-family: "Nunito Sans", sans-serif;
+      }
+      .btn-outline {
+        border-color: var(--mist);
+        color: var(--slate);
+        background: transparent;
+      }
+      .btn-outline:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+      .btn-blue {
+        background: var(--blue);
+        color: #fff;
+        border-color: var(--blue);
+      }
+      .btn-blue:hover {
+        background: var(--blue-deep);
+      }
+      .btn-orange {
+        background: var(--orange);
+        color: #fff;
+        border-color: var(--orange);
+      }
+      .btn-orange:hover {
+        background: #c45c10;
+      }
+
+      /* Footer */
+      .site-footer {
+        background: var(--charcoal);
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        padding: 28px 40px;
+        font-size: 12.5px;
+      }
+      .site-footer a {
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .site-footer a:hover {
+        color: #fff;
+      }
+
+      @media print {
+        .topbar,
+        .nav,
+        .doc-badges,
+        .print-row,
+        .toc,
+        .site-footer {
+          display: none !important;
+        }
+        .page-wrap {
+          grid-template-columns: 1fr;
+          padding: 0;
+        }
+        .doc {
+          border: none;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <h1>Membership Policies</h1>
+      <p>
+        Please read these documents carefully before registering as a SIAWED
+        member. By joining, you agree to all terms outlined below.
+      </p>
+      <div class="doc-badges">
+        <button class="doc-badge" onclick="showTab('privacy', this)">
+          Privacy Policy
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+     TAB 2 — PRIVACY POLICY
+══════════════════════════════════════════ -->
+    <div id="tab-privacy" class="tab-content active">
+      <div class="page-wrap">
+        <aside class="toc">
+          <div class="toc-title">Contents</div>
+          <ol>
+            <li><a href="#pp-1">Who We Are</a></li>
+            <li><a href="#pp-2">Data We Collect</a></li>
+            <li><a href="#pp-3">How We Use Data</a></li>
+            <li><a href="#pp-4">Legal Basis</a></li>
+            <li><a href="#pp-5">Data Sharing</a></li>
+            <li><a href="#pp-6">Data Retention</a></li>
+            <li><a href="#pp-7">Your Rights</a></li>
+            <li><a href="#pp-8">Cookies</a></li>
+            <li><a href="#pp-9">Security</a></li>
+            <li><a href="#pp-10">Children</a></li>
+            <li><a href="#pp-11">Third-Party Links</a></li>
+            <li><a href="#pp-12">Changes</a></li>
+            <li><a href="#pp-13">Contact</a></li>
+          </ol>
+          <div class="toc-eff">
+            <strong>Effective Date</strong>
+            1 July 2026
+            <br /><br />
+            <strong>Jurisdiction</strong>
+            India (IT Act 2000 &amp; DPDP Act 2023)
+          </div>
+        </aside>
+
+        <main class="doc">
+          <div class="print-row">
+            <button class="btn btn-outline" onclick="window.print()">
+              🖨️ Print
+            </button>
+          </div>
+
+          <div class="doc-intro">
+            <strong>SIAWED Privacy Policy</strong>
+            The Southern Industrial Academy for Women Entrepreneurs Development
+            ("SIAWED") is committed to protecting your personal data. This
+            Privacy Policy explains how we collect, use, store, and share
+            information when you register as a member, visit our website, or use
+            WENBA. This policy is compliant with India's
+            <strong
+              >Digital Personal Data Protection Act, 2023 (DPDP Act)</strong
+            >
+            and the Information Technology Act, 2000.
+          </div>
+
+          <!-- 1 -->
+          <div class="doc-section" id="pp-1">
+            <h2><span class="sec-num">1</span>Who We Are (Data Fiduciary)</h2>
+            <p>
+              SIAWED is the Data Fiduciary responsible for your personal data.
+              Our registered address is 601 "DEEPA", Choolaimedu High Road,
+              Chennai – 600094, Tamil Nadu, India. You may contact our
+              designated Data Protection Officer at
+              <a href="mailto:privacy@siawed.org">privacy@siawed.org</a>.
+            </p>
+          </div>
+
+          <!-- 2 -->
+          <div class="doc-section" id="pp-2">
+            <h2><span class="sec-num">2</span>Data We Collect</h2>
+            <h3>2.1 Information You Provide</h3>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Examples</th>
+                  <th>When Collected</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Identity</td>
+                  <td>Full name, date of birth, gender</td>
+                  <td>Registration</td>
+                </tr>
+                <tr>
+                  <td>Contact</td>
+                  <td>Email, phone, postal address</td>
+                  <td>Registration</td>
+                </tr>
+                <tr>
+                  <td>Business</td>
+                  <td>
+                    Business name, GST number, category, product descriptions
+                  </td>
+                  <td>WENBA registration</td>
+                </tr>
+                <tr>
+                  <td>Financial</td>
+                  <td>
+                    Payment reference (not card details — handled by payment
+                    gateway)
+                  </td>
+                  <td>Fee payment</td>
+                </tr>
+                <tr>
+                  <td>Documents</td>
+                  <td>
+                    Aadhaar / PAN / business registration (for verification
+                    only)
+                  </td>
+                  <td>KYC verification</td>
+                </tr>
+                <tr>
+                  <td>Communications</td>
+                  <td>Emails, support queries, feedback forms</td>
+                  <td>Ongoing</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3>2.2 Automatically Collected Data</h3>
+            <ul>
+              <li>IP address, browser type, device type, operating system</li>
+              <li>Pages visited, time spent, links clicked on our website</li>
+              <li>Cookies and similar tracking technologies (see Section 8)</li>
+            </ul>
+          </div>
+
+          <!-- 3 -->
+          <div class="doc-section" id="pp-3">
+            <h2><span class="sec-num">3</span>How We Use Your Data</h2>
+            <ul>
+              <li>
+                <strong>Membership administration:</strong> processing
+                registration, issuing certificates, managing renewals.
+              </li>
+              <li>
+                <strong>Service delivery:</strong> granting access to events,
+                training programs, and the WENBA marketplace.
+              </li>
+              <li>
+                <strong>Communication:</strong> sending newsletters, event
+                invitations, policy updates, and member resources.
+              </li>
+              <li>
+                <strong>Marketing:</strong> featuring members in case studies,
+                success stories, and social media (with consent).
+              </li>
+              <li>
+                <strong>Analytics:</strong> understanding how members use our
+                platforms to improve services.
+              </li>
+              <li>
+                <strong>Legal compliance:</strong> meeting obligations under
+                Indian law including GST, PMLA, and regulatory requirements.
+              </li>
+              <li>
+                <strong>Safety:</strong> detecting, preventing, and responding
+                to fraud or abuse.
+              </li>
+            </ul>
+          </div>
+
+          <!-- 4 -->
+          <div class="doc-section" id="pp-4">
+            <h2><span class="sec-num">4</span>Legal Basis for Processing</h2>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Purpose</th>
+                  <th>Legal Basis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Membership registration &amp; administration</td>
+                  <td>Contract performance</td>
+                </tr>
+                <tr>
+                  <td>Payment processing</td>
+                  <td>Contract performance</td>
+                </tr>
+                <tr>
+                  <td>Newsletters &amp; communications</td>
+                  <td>Consent (withdrawable at any time)</td>
+                </tr>
+                <tr>
+                  <td>Member spotlights &amp; marketing</td>
+                  <td>Consent</td>
+                </tr>
+                <tr>
+                  <td>Legal &amp; regulatory compliance</td>
+                  <td>Legal obligation</td>
+                </tr>
+                <tr>
+                  <td>Fraud prevention</td>
+                  <td>Legitimate interest</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 5 -->
+          <div class="doc-section" id="pp-5">
+            <h2><span class="sec-num">5</span>Data Sharing</h2>
+            <p>
+              SIAWED does not sell your personal data. We may share your data
+              with:
+            </p>
+            <ul>
+              <li>
+                <strong>Service providers:</strong> payment gateways, email
+                platforms, cloud hosting, and analytics tools — under strict
+                data processing agreements.
+              </li>
+              <li>
+                <strong>WENBA platform:</strong> your business name, product
+                listings, and contact information are visible to registered
+                corporate buyers and consumers when you opt in.
+              </li>
+              <li>
+                <strong>Event co-organisers:</strong> name and contact details
+                may be shared with partners conducting SIAWED-affiliated events
+                you register for.
+              </li>
+              <li>
+                <strong>Government and regulators:</strong> when required by
+                law, court order, or regulatory authority.
+              </li>
+            </ul>
+            <div class="highlight-box hb-blue">
+              <strong>Your Control</strong>
+              You may opt out of event partner sharing and WENBA marketplace
+              visibility at any time by contacting us. Opting out of WENBA
+              visibility does not cancel your membership.
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="doc-section" id="pp-6">
+            <h2><span class="sec-num">6</span>Data Retention</h2>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Data Type</th>
+                  <th>Retention Period</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Active member records</td>
+                  <td>Duration of membership + 3 years</td>
+                </tr>
+                <tr>
+                  <td>Financial / payment records</td>
+                  <td>7 years (as required under Indian tax law)</td>
+                </tr>
+                <tr>
+                  <td>KYC / identity documents</td>
+                  <td>
+                    Duration of membership + 1 year, then securely deleted
+                  </td>
+                </tr>
+                <tr>
+                  <td>Marketing consent records</td>
+                  <td>Until consent is withdrawn + 2 years</td>
+                </tr>
+                <tr>
+                  <td>Website analytics (anonymised)</td>
+                  <td>24 months rolling</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              After the applicable retention period, data is securely deleted or
+              anonymised.
+            </p>
+          </div>
+
+          <!-- 7 -->
+          <div class="doc-section" id="pp-7">
+            <h2>
+              <span class="sec-num">7</span>Your Rights Under DPDP Act 2023
+            </h2>
+            <p>
+              As a Data Principal under India's Digital Personal Data Protection
+              Act 2023, you have the following rights:
+            </p>
+            <ul>
+              <li>
+                <strong>Right to Access:</strong> request a summary of the
+                personal data we hold about you.
+              </li>
+              <li>
+                <strong>Right to Correction:</strong> request correction of
+                inaccurate or incomplete data.
+              </li>
+              <li>
+                <strong>Right to Erasure:</strong> request deletion of your
+                data, subject to our legal retention obligations.
+              </li>
+              <li>
+                <strong>Right to Grievance Redressal:</strong> raise a complaint
+                with our Data Protection Officer.
+              </li>
+              <li>
+                <strong>Right to Nominate:</strong> nominate another individual
+                to exercise rights on your behalf in the event of death or
+                incapacity.
+              </li>
+              <li>
+                <strong>Right to Withdraw Consent:</strong> withdraw consent for
+                marketing communications at any time.
+              </li>
+            </ul>
+            <p>
+              To exercise any of these rights, email
+              <a href="mailto:privacy@siawed.org">privacy@siawed.org</a> with
+              your registered name and membership ID. We will respond within 30
+              days.
+            </p>
+          </div>
+
+          <!-- 8 -->
+          <div class="doc-section" id="pp-8">
+            <h2><span class="sec-num">8</span>Cookies</h2>
+            <p>Our website uses the following types of cookies:</p>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Purpose</th>
+                  <th>Opt-Out</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Essential</td>
+                  <td>Login sessions, security, form submissions</td>
+                  <td><span class="tag tag-no">Required</span></td>
+                </tr>
+                <tr>
+                  <td>Analytics</td>
+                  <td>Understanding usage patterns (Google Analytics)</td>
+                  <td><span class="tag tag-yes">Opt-Out</span></td>
+                </tr>
+                <tr>
+                  <td>Preferences</td>
+                  <td>Remembering language and display settings</td>
+                  <td><span class="tag tag-yes">Opt-Out</span></td>
+                </tr>
+                <tr>
+                  <td>Marketing</td>
+                  <td>Tracking ad performance (if applicable)</td>
+                  <td><span class="tag tag-yes">Opt-Out</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              You can manage cookie preferences through your browser settings or
+              via our cookie consent banner.
+            </p>
+          </div>
+
+          <!-- 9 -->
+          <div class="doc-section" id="pp-9">
+            <h2><span class="sec-num">9</span>Data Security</h2>
+            <p>
+              We implement appropriate technical and organisational measures to
+              protect your personal data, including:
+            </p>
+            <ul>
+              <li>
+                TLS/SSL encryption for all data transmitted via our website and
+                Portal.
+              </li>
+              <li>Secure, access-controlled cloud storage with audit logs.</li>
+              <li>
+                Payment processing via PCI-DSS compliant payment gateways —
+                SIAWED does not store card details.
+              </li>
+              <li>
+                Regular security assessments and staff training on data
+                protection.
+              </li>
+            </ul>
+            <p>
+              While we take all reasonable precautions, no digital system is
+              completely secure. In the event of a data breach affecting your
+              rights, we will notify you as required under the DPDP Act.
+            </p>
+          </div>
+
+          <!-- 10 -->
+          <div class="doc-section" id="pp-10">
+            <h2><span class="sec-num">10</span>Children's Data</h2>
+            <p>
+              SIAWED membership is not available to individuals under 18 years
+              of age. We do not knowingly collect personal data from minors. If
+              we become aware that a member is under 18, we will cancel the
+              account and delete related data.
+            </p>
+          </div>
+
+          <!-- 11 -->
+          <div class="doc-section" id="pp-11">
+            <h2><span class="sec-num">11</span>Third-Party Links</h2>
+            <p>
+              Our website may contain links to external websites including
+              WENBA, partner organisations, and payment gateways. SIAWED is not
+              responsible for the privacy practices of third-party websites. We
+              encourage you to review the privacy policies of any external site
+              you visit.
+            </p>
+          </div>
+
+          <!-- 12 -->
+          <div class="doc-section" id="pp-12">
+            <h2><span class="sec-num">12</span>Changes to This Policy</h2>
+            <p>
+              SIAWED may update this Privacy Policy periodically. Material
+              changes will be communicated via email to registered members at
+              least 14 days before taking effect. The "Effective Date" at the
+              top of this document indicates the last revision.
+            </p>
+          </div>
+
+          <!-- 13 -->
+          <div class="doc-section" id="pp-13">
+            <h2>
+              <span class="sec-num">13</span>Contact &amp; Grievance Redressal
+            </h2>
+            <div class="contact-block">
+              <h4>Data Protection Officer — SIAWED</h4>
+              <div class="contact-row">
+                <span class="ci">✉</span
+                ><span
+                  ><a href="mailto:privacy@siawed.org"
+                    >privacy@siawed.org</a
+                  ></span
+                >
+              </div>
+              <div class="contact-row">
+                <span class="ci">📞</span
+                ><span>044 4351 4334 | 6381814441</span>
+              </div>
+              <div class="contact-row">
+                <span class="ci">📍</span
+                ><span
+                  >601 "DEEPA", Choolaimedu High Road, Chennai – 600094</span
+                >
+              </div>
+              <p style="margin-top: 12px; font-size: 13px; color: var(--slate)">
+                If you are unsatisfied with our response, you may escalate to
+                India's <strong>Data Protection Board</strong> once constituted
+                under the DPDP Act, 2023.
+              </p>
+            </div>
+          </div>
+
+          <div class="sig-block">
+            <div class="sig-left">
+              <strong>Ms T Vanadhi Devi</strong>
+              Founder &amp; President, SIAWED<br />
+              Chennai, Tamil Nadu, India
+            </div>
+            <div class="sig-right">
+              <div class="rev-date">Effective: 1 July 2026</div>
+              Version 1.0 | Review due: July 2027
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!-- /tab-privacy -->
+
+    <!-- FOOTER -->
+    <div class="site-footer">
+      © 2026 SIAWED — Southern Industrial Academy for Women Entrepreneurs
+      Development, Chennai.
+      <span style="margin: 0 8px">|</span>
+      <a href="index.html">Home</a>
+      <span style="margin: 0 8px">·</span>
+      <a href="mailto:info@siawed.org">info@siawed.org</a>
+      <span style="margin: 0 8px">·</span>
+      <a href="tel:+914443514334">044 4351 4334</a>
+    </div>
+
+    <script>
+      function showTab(id, btn) {
+        // Hide all tabs
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".doc-badge")
+          .forEach((b) => b.classList.remove("active"));
+        // Show selected
+        document.getElementById("tab-" + id).classList.add("active");
+        btn.classList.add("active");
+        // Scroll to top of content
+        window.scrollTo({
+          top: document.querySelector(".page-wrap").offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

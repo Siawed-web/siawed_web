@@ -1,0 +1,114 @@
+.WhatWeDoSection {
+  padding: 100px 0;
+  background-color: #f7fafc;
+
+  .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+
+    .left {
+      .pointsList {
+        margin: 30px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .pointItem {
+          display: flex;
+          align-items: flex-start;
+          gap: 15px;
+
+          .checkIcon {
+            color: $color_2;
+            font-size: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+          }
+
+          p {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.5;
+            margin: 0;
+            font-weight: 500;
+          }
+        }
+      }
+
+      .goalText {
+        font-size: 16px;
+        color: $color_1;
+        font-weight: 700;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        padding-left: 15px;
+        border-left: 4px solid $color_2;
+      }
+    }
+
+    .right {
+      .imageWrap {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        border-radius: 20px;
+        overflow: hidden;
+
+        .mainImage {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .floatingBox {
+          position: absolute;
+          bottom: 40px;
+          left: -30px;
+          background: #ffffff;
+          padding: 20px 30px;
+          border-radius: 12px;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+          border-left: 6px solid $color_2;
+
+          h4 {
+            font-size: 18px;
+            color: $color_1;
+            font-weight: 800;
+            margin-bottom: 5px;
+          }
+
+          p {
+            font-size: 14px;
+            color: #718096;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond-below(lg) {
+    .wrap {
+      gap: 40px;
+      .right .imageWrap {
+        height: 500px;
+      }
+    }
+  }
+
+  @include respond-below(md) {
+    padding: 70px 0;
+    .wrap {
+      grid-template-columns: 1fr;
+      .right .imageWrap {
+        height: 400px;
+        margin-top: 40px;
+        .floatingBox {
+          left: 20px;
+        }
+      }
+    }
+  }
+}

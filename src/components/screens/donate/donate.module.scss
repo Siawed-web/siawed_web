@@ -1,0 +1,432 @@
+@import "@/styles/scss/variables";
+@import "@/styles/scss/mixins";
+
+// Global Donate Page Styles
+.donateWrapper {
+  overflow: hidden;
+}
+
+// 1. Impact Hero
+.heroSection {
+  background:
+    linear-gradient(135deg, rgba($blue-deep, 0.95), rgba($teal, 0.9)),
+    url("/images/impact-hero.jpg") center/cover;
+  color: $white;
+  padding: 6rem 0 4rem;
+  text-align: center;
+  position: relative;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.statsGrid {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  background: rgba($white, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 2.5rem;
+  border-radius: $r;
+  border: 1px solid rgba($white, 0.2);
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: $orange;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+// 2. Donation Wizard
+.wizardSection {
+  padding: 4rem 0;
+  background: $ivory;
+}
+
+.wizardContainer {
+  @include defaultBox;
+  // max-width: 900px;
+  margin: -6rem auto 0;
+  position: relative;
+  z-index: 10;
+  padding: 3rem;
+  background: $white;
+}
+
+.wizardTitle {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.frequencyToggle {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+
+  button {
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    border: 1px solid $mist;
+    background: transparent;
+    font-weight: 600;
+    transition: $t-base;
+
+    &.active {
+      background: $teal;
+      color: $white;
+      border-color: $teal;
+      box-shadow: $sh-sm;
+    }
+  }
+}
+
+.impactCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.impactCard {
+  border: 2px solid $mist;
+  border-radius: $r;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: $t-base;
+  position: relative;
+  overflow: hidden;
+
+  .cardIcon {
+    font-size: 2.5rem;
+    color: $blue;
+    margin-bottom: 1rem;
+    transition: $t-base;
+  }
+
+  .cardAmount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .cardDesc {
+    font-size: 0.9rem;
+    color: $slate;
+  }
+
+  &:hover {
+    border-color: rgba($teal, 0.5);
+    transform: translateY(-5px);
+
+    .cardIcon {
+      transform: scale(1.1);
+    }
+  }
+
+  &.active {
+    border-color: $teal;
+    background: rgba($teal, 0.03);
+
+    &::after {
+      content: "✓";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: $teal;
+      color: $white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.badgeRecommended {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $orange;
+  color: $white;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+// Custom Input
+.customDonation {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px dashed $mist;
+}
+
+.customInputWrapper {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.currencyPrefix {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $slate;
+}
+
+.customInput {
+  width: 100%;
+  padding: 8px 20px;
+  // font-size: rem;
+  font-weight: 700;
+  border: 2px solid $mist;
+  border-radius: 10px;
+  outline: none;
+  transition: $t-base;
+  text-align: center;
+
+  &:focus {
+    border-color: $teal;
+  }
+}
+
+.liveImpactMessage {
+  text-align: center;
+  color: $teal;
+  font-weight: 600;
+  margin-top: 1rem;
+  min-height: 24px;
+}
+
+// Form & Payment
+.formSection {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid $mist;
+}
+
+.paymentMethods {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+
+  .payCard {
+    border: 1px solid $mist;
+    border-radius: $r;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: $t-base;
+
+    &.active {
+      border-color: $teal;
+      background: rgba($teal, 0.05);
+    }
+  }
+}
+
+// 3. Impact Timeline
+.timelineSection {
+  padding: 5rem 0;
+  background: $parchment;
+}
+
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  max-width: 800px;
+  margin: 3rem auto 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $mist;
+    z-index: 1;
+  }
+}
+
+.timelineStep {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 120px;
+
+  .stepIcon {
+    width: 60px;
+    height: 60px;
+    background: $white;
+    border: 2px solid $teal;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: $teal;
+  }
+
+  .stepText {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+// 4. Why Donate
+.whySection {
+  padding: 5rem 0;
+  background: $white;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.featureCard {
+  text-align: center;
+  padding: 2rem;
+
+  .featureIcon {
+    font-size: 3rem;
+    color: $orange;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// 5. Success Stories
+.storiesSection {
+  padding: 5rem 0;
+  background: $ivory;
+}
+
+.storyCard {
+  @include defaultBox;
+  padding: 2rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  .storyImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .storyContent {
+    flex: 1;
+
+    blockquote {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: $slate;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// 6. FAQ
+.faqSection {
+  padding: 5rem 0;
+  background: $white;
+}
+
+// 7. Corporate
+.corporateSection {
+  background: $teal-light;
+  padding: 4rem 0;
+  border-radius: $r;
+  margin: 3rem 0;
+  text-align: center;
+}
+
+// 8. Final CTA
+.finalCtaSection {
+  background: linear-gradient(135deg, $orange, $orange-mid);
+  color: $white;
+  padding: 6rem 0;
+  text-align: center;
+
+  h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .ctaButtons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wizardContainer {
+    padding: 1.5rem;
+    margin-top: -3rem;
+  }
+
+  .timeline {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    &::before {
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      right: auto;
+      width: 2px;
+      height: 100%;
+    }
+  }
+
+  .storyCard {
+    flex-direction: column;
+    text-align: center;
+  }
+}

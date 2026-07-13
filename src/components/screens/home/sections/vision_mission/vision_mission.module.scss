@@ -1,0 +1,94 @@
+.VisionMissionSection {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #ffffff 0%, rgba($color_1, 0.03) 100%);
+  position: relative;
+  overflow: hidden;
+
+  .cardsWrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+
+    .card {
+      @include defaultBox;
+      border-radius: 20px;
+      padding: 45px 35px;
+      background: #ffffff;
+      border: 1px solid rgba($color_1, 0.08);
+      box-shadow: 0 10px 35px rgba($color_1, 0.03);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 0; // reset default box margin
+
+      .iconWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        background-color: rgba($color_1, 0.06);
+        border-radius: 16px;
+        margin-bottom: 25px;
+        transition: all 0.4s ease;
+
+        .icon {
+          font-size: 32px;
+          color: $color_1;
+          transition: all 0.4s ease;
+        }
+      }
+
+      .cardTitle {
+        font-size: 26px;
+        font-weight: 700;
+        color: $color_1;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+      }
+
+      .cardText {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #4a5568;
+        margin: 0;
+
+        span {
+          color: $color_1;
+          font-weight: 600;
+        }
+      }
+
+      &:hover {
+        transform: translateY(-8px);
+        border-color: rgba($color_1, 0.2);
+        box-shadow: 0 20px 45px rgba($color_1, 0.08);
+
+        .iconWrapper {
+          background-color: $color_1;
+          transform: rotate(5deg);
+
+          .icon {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond-below(md) {
+    padding: 70px 0;
+
+    .cardsWrap {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 40px;
+
+      .card {
+        padding: 35px 25px;
+      }
+    }
+  }
+}

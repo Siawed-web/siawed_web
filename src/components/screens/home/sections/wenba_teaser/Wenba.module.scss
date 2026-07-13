@@ -1,0 +1,145 @@
+.wenbaContainer {
+  /* ============================================================
+     15. WENBA SECTION
+     ============================================================ */
+  .wenbaTop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  /* WENBA brand lockup card */
+  .wenbaBrandCard {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 22px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin-bottom: 26px;
+    width: fit-content;
+  }
+  .wenbaBrandCard svg {
+    height: 80px;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .wenbaBrandCardPowered {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 5px;
+  }
+  .wenbaBrandCardName {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.66);
+    line-height: 1.5;
+  }
+
+  /* Category filter pills */
+  .wenbaCats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+  .wenbaCat {
+    padding: 6px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all var(--t-base);
+    background: none;
+  }
+  .wenbaCat.isActive,
+  .wenbaCat:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #fff;
+  }
+
+  /* Right column */
+  .wenbaRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 14px;
+    padding-top: 14px;
+  }
+
+  /* Stats row */
+  .wenbaStats {
+    display: flex;
+    gap: 26px;
+    margin-top: 26px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .wenbaStatNumber {
+    font-size: 30px;
+    font-weight: 800;
+    color: $blue;
+  }
+  .wenbaStatLabel {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.38);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 3px;
+  }
+
+  /* Product images grid */
+  .wenbaImgs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .wenbaImgCard {
+    border-radius: var(--r);
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 4/5;
+  }
+  .wenbaImgCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .wenbaImgCard:hover img {
+    transform: scale(1.05);
+  }
+  .wenbaImgCardLabel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
+    padding: 20px 14px 14px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .wenbaTop {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .wenbaImgs {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,0 +1,152 @@
+.partnerContentSection {
+  padding: 80px 0;
+  background: $ivory;
+}
+
+.introBox {
+  @include defaultBox;
+  background: linear-gradient(135deg, rgba($blue-light, 0.1), rgba($teal-light, 0.1));
+  padding: 40px;
+  border-radius: $r;
+  text-align: center;
+  margin-bottom: 60px;
+  border: 1px solid rgba($blue, 0.1);
+  
+  h2 {
+    color: $blue-deep;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    color: $slate;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+  }
+}
+
+.sectionBlock {
+  margin-bottom: 60px;
+  background: $white;
+  border-radius: $r;
+  box-shadow: $sh-sm;
+  scroll-margin-top: calc(#{$nav-h} + 40px);
+  transition: box-shadow $t-base;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+
+  &:hover {
+    box-shadow: $sh-md;
+  }
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.textWrap {
+  padding: 50px;
+  border-left: 6px solid $blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sectionBlockReverse {
+  .imageWrap {
+    order: 2;
+  }
+  .textWrap {
+    order: 1;
+    border-left: none;
+    border-right: 6px solid $blue;
+  }
+}
+
+.heading {
+  color: $blue-deep;
+  margin-bottom: 24px;
+  font-weight: 800;
+  font-size: 32px;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: $orange;
+    margin-top: 12px;
+    border-radius: 2px;
+  }
+}
+
+.content {
+  font-size: 16px;
+  color: $slate;
+  line-height: 1.8;
+}
+
+@media (max-width: 992px) {
+  .sectionBlock {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionBlockReverse {
+    .imageWrap {
+      order: 1;
+    }
+    .textWrap {
+      order: 2;
+      border-right: none;
+      border-left: 6px solid $blue;
+    }
+  }
+
+  .imageWrap {
+    min-height: 300px;
+  }
+
+  .textWrap {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .partnerContentSection {
+    padding: 60px 0;
+  }
+
+  .sectionBlock {
+    margin-bottom: 40px;
+  }
+
+  .imageWrap {
+    min-height: 250px;
+  }
+
+  .textWrap {
+    padding: 30px 20px;
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+  
+  .introBox {
+    padding: 30px 20px;
+  }
+}

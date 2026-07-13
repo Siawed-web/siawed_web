@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SIAWED – Membership Policies</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --blue: #1a6fa8;
+        --blue-deep: #0e4d7a;
+        --blue-light: #eaf4fb;
+        --orange: #e8701a;
+        --orange-light: #fef3e7;
+        --teal: #0d7a6e;
+        --teal-light: #e0f5f2;
+        --ivory: #f9f7f3;
+        --parchment: #f1ebe0;
+        --mist: #e2d9ce;
+        --charcoal: #1c1c1c;
+        --slate: #4a4a4a;
+        --white: #fff;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Nunito Sans", sans-serif;
+        background: var(--ivory);
+        color: var(--charcoal);
+        line-height: 1.6;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ── TOPBAR ── */
+      .topbar {
+        background: var(--blue-deep);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 6px 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .topbar a {
+        color: rgba(255, 255, 255, 0.75);
+      }
+      @media (max-width: 768px) {
+        .topbar {
+          display: none;
+        }
+      }
+
+      /* ── NAV ── */
+      .nav {
+        background: var(--white);
+        border-bottom: 2px solid var(--mist);
+        padding: 0 52px;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-logo img {
+        height: 50px;
+        width: auto;
+      }
+      .nav-back {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--blue);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      @media (max-width: 600px) {
+        .nav {
+          padding: 0 18px;
+        }
+      }
+
+      /* ── PAGE HERO ── */
+      .page-hero {
+        background: var(--blue-deep);
+        padding: 56px 52px 52px;
+        text-align: center;
+      }
+      .page-hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 48px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 14px;
+      }
+      .page-hero p {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.72);
+        max-width: 580px;
+        margin: 0 auto 24px;
+      }
+      .doc-badges {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .doc-badge {
+        padding: 7px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        transition: all 0.2s;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .doc-badge:hover,
+      .doc-badge.active {
+        background: var(--orange);
+        border-color: var(--orange);
+        color: #fff;
+      }
+
+      /* ── TAB CONTENT ── */
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      /* ── LAYOUT ── */
+      .page-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 56px 40px 80px;
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .page-wrap {
+          grid-template-columns: 1fr;
+          padding: 40px 22px 60px;
+        }
+      }
+
+      /* ── SIDEBAR TOC ── */
+      .toc {
+        position: sticky;
+        top: 88px;
+        background: var(--white);
+        border: 1px solid var(--mist);
+        border-radius: 10px;
+        padding: 20px;
+        font-size: 13px;
+      }
+      .toc-title {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--orange);
+        margin-bottom: 14px;
+      }
+      .toc ol {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .toc ol li a {
+        color: var(--slate);
+        font-weight: 600;
+        transition: color 0.15s;
+        display: block;
+        padding: 3px 0 3px 10px;
+        border-left: 2px solid transparent;
+        font-size: 12.5px;
+      }
+      .toc ol li a:hover {
+        color: var(--blue);
+        border-left-color: var(--blue);
+        text-decoration: none;
+      }
+      .toc-eff {
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid var(--mist);
+        font-size: 11.5px;
+        color: var(--slate);
+      }
+      .toc-eff strong {
+        color: var(--charcoal);
+        display: block;
+        margin-bottom: 3px;
+      }
+      @media (max-width: 900px) {
+        .toc {
+          display: none;
+        }
+      }
+
+      /* ── DOCUMENT BODY ── */
+      .doc {
+        background: var(--white);
+        border: 1px solid var(--mist);
+        border-radius: 10px;
+        padding: 48px 52px;
+      }
+      @media (max-width: 600px) {
+        .doc {
+          padding: 28px 22px;
+        }
+      }
+
+      .doc-intro {
+        background: var(--blue-light);
+        border-left: 4px solid var(--blue);
+        border-radius: 0 8px 8px 0;
+        padding: 16px 20px;
+        margin-bottom: 36px;
+        font-size: 14px;
+        color: var(--slate);
+        line-height: 1.75;
+      }
+      .doc-intro strong {
+        color: var(--blue);
+      }
+
+      /* Section */
+      .doc-section {
+        margin-bottom: 40px;
+        scroll-margin-top: 100px;
+      }
+      .doc-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .doc-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--mist);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .doc-section h2 .sec-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        font-family: "Nunito Sans", sans-serif;
+        flex-shrink: 0;
+      }
+
+      .doc-section h3 {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--charcoal);
+        margin: 22px 0 10px;
+      }
+      .doc-section p {
+        font-size: 14px;
+        line-height: 1.82;
+        color: var(--slate);
+        margin-bottom: 14px;
+      }
+      .doc-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Lists */
+      .doc-section ul,
+      .doc-section ol {
+        padding-left: 0;
+        margin: 10px 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .doc-section ul li,
+      .doc-section ol li {
+        font-size: 14px;
+        line-height: 1.75;
+        color: var(--slate);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .doc-section ul li::before {
+        content: "•";
+        color: var(--blue);
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .doc-section ol {
+        counter-reset: ol-counter;
+        list-style: none;
+      }
+      .doc-section ol li {
+        counter-increment: ol-counter;
+      }
+      .doc-section ol li::before {
+        content: counter(ol-counter) ".";
+        color: var(--blue);
+        font-weight: 800;
+        font-size: 13px;
+        flex-shrink: 0;
+        min-width: 20px;
+      }
+
+      /* Table */
+      .policy-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0 20px;
+        font-size: 13.5px;
+      }
+      .policy-table th {
+        background: var(--blue);
+        color: #fff;
+        padding: 11px 14px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .policy-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--mist);
+        color: var(--slate);
+        vertical-align: top;
+      }
+      .policy-table tr:nth-child(even) td {
+        background: var(--ivory);
+      }
+      .policy-table .tag {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .tag-yes {
+        background: var(--teal-light);
+        color: var(--teal);
+      }
+      .tag-no {
+        background: #fde8e8;
+        color: #c0392b;
+      }
+      .tag-partial {
+        background: var(--orange-light);
+        color: var(--orange);
+      }
+
+      /* Highlight box */
+      .highlight-box {
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin: 18px 0;
+        font-size: 13.5px;
+        line-height: 1.75;
+      }
+      .hb-blue {
+        background: var(--blue-light);
+        border-left: 4px solid var(--blue);
+      }
+      .hb-orange {
+        background: var(--orange-light);
+        border-left: 4px solid var(--orange);
+      }
+      .hb-teal {
+        background: var(--teal-light);
+        border-left: 4px solid var(--teal);
+      }
+      .hb-warn {
+        background: #fff8e1;
+        border-left: 4px solid #f0a500;
+      }
+      .highlight-box strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+        opacity: 0.7;
+      }
+
+      /* Contact block */
+      .contact-block {
+        background: var(--parchment);
+        border: 1px solid var(--mist);
+        border-radius: 8px;
+        padding: 20px 24px;
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      .contact-block h4 {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--charcoal);
+        margin-bottom: 12px;
+      }
+      .contact-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: var(--slate);
+      }
+      .contact-row .ci {
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* Signature block */
+      .sig-block {
+        margin-top: 48px;
+        padding-top: 28px;
+        border-top: 2px solid var(--mist);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .sig-left {
+        font-size: 13px;
+        color: var(--slate);
+        line-height: 1.7;
+      }
+      .sig-left strong {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--charcoal);
+        display: block;
+        margin-bottom: 3px;
+      }
+      .sig-right {
+        text-align: right;
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .sig-right .rev-date {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--orange);
+      }
+
+      /* Print button */
+      .print-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.18s;
+        font-family: "Nunito Sans", sans-serif;
+      }
+      .btn-outline {
+        border-color: var(--mist);
+        color: var(--slate);
+        background: transparent;
+      }
+      .btn-outline:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+      .btn-blue {
+        background: var(--blue);
+        color: #fff;
+        border-color: var(--blue);
+      }
+      .btn-blue:hover {
+        background: var(--blue-deep);
+      }
+      .btn-orange {
+        background: var(--orange);
+        color: #fff;
+        border-color: var(--orange);
+      }
+      .btn-orange:hover {
+        background: #c45c10;
+      }
+
+      /* Footer */
+      .site-footer {
+        background: var(--charcoal);
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        padding: 28px 40px;
+        font-size: 12.5px;
+      }
+      .site-footer a {
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .site-footer a:hover {
+        color: #fff;
+      }
+
+      @media print {
+        .topbar,
+        .nav,
+        .doc-badges,
+        .print-row,
+        .toc,
+        .site-footer {
+          display: none !important;
+        }
+        .page-wrap {
+          grid-template-columns: 1fr;
+          padding: 0;
+        }
+        .doc {
+          border: none;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <h1>Membership Policies</h1>
+      <p>
+        Please read these documents carefully before registering as a SIAWED
+        member. By joining, you agree to all terms outlined below.
+      </p>
+      <div class="doc-badges">
+        <button class="doc-badge active" onclick="showTab('refund', this)">
+          Refund Policy
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+     TAB 3 — REFUND POLICY
+══════════════════════════════════════════ -->
+    <div id="tab-refund" class="tab-content active">
+      <div class="page-wrap">
+        <aside class="toc">
+          <div class="toc-title">Contents</div>
+          <ol>
+            <li><a href="#rp-1">Overview</a></li>
+            <li><a href="#rp-2">Refund Schedule</a></li>
+            <li><a href="#rp-3">Eligibility Criteria</a></li>
+            <li><a href="#rp-4">Non-Refundable Items</a></li>
+            <li><a href="#rp-5">How to Request</a></li>
+            <li><a href="#rp-6">Processing Timeline</a></li>
+            <li><a href="#rp-7">Renewal Refunds</a></li>
+            <li><a href="#rp-8">Event Cancellations</a></li>
+            <li><a href="#rp-9">Plan Changes</a></li>
+            <li><a href="#rp-10">Disputes</a></li>
+            <li><a href="#rp-11">Contact</a></li>
+          </ol>
+          <div class="toc-eff">
+            <strong>Effective Date</strong>
+            1 July 2026
+            <br /><br />
+            <strong>Currency</strong>
+            Indian Rupees (INR)
+          </div>
+        </aside>
+
+        <main class="doc">
+          <div class="print-row">
+            <button class="btn btn-outline" onclick="window.print()">
+              🖨️ Print
+            </button>
+          </div>
+
+          <div class="doc-intro">
+            <strong>SIAWED Membership Refund Policy</strong>
+            SIAWED is committed to fair and transparent membership practices.
+            This Refund Policy sets out the circumstances under which membership
+            fees may be refunded, the process for requesting refunds, and the
+            timelines involved. Please read this policy before registering.
+          </div>
+
+          <!-- 1 -->
+          <div class="doc-section" id="rp-1">
+            <h2><span class="sec-num">1</span>Overview</h2>
+            <p>
+              SIAWED membership fees are generally non-refundable once a
+              membership has been activated and benefits accessed. However, we
+              offer a time-limited refund window and make exceptions for
+              specific circumstances outlined in this policy. All refund
+              decisions by SIAWED are final.
+            </p>
+            <div class="highlight-box hb-teal">
+              <strong>Quick Summary</strong>
+              Full refund within 7 days if no benefits used → Partial refund
+              within 30 days → No refund after 30 days (except exceptional
+              circumstances). Event fees are separate from membership fees.
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="doc-section" id="rp-2">
+            <h2><span class="sec-num">2</span>Refund Schedule</h2>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Cancellation Timeframe</th>
+                  <th>Refund Amount</th>
+                  <th>Conditions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Within 7 days</strong> of payment</td>
+                  <td><strong>100% refund</strong></td>
+                  <td>
+                    No membership benefits accessed, no events attended, WENBA
+                    not activated
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>8 – 30 days</strong> after payment</td>
+                  <td><strong>50% refund</strong></td>
+                  <td>
+                    Limited benefit use only (e.g., received welcome kit but no
+                    events attended)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>31 – 90 days</strong> after payment</td>
+                  <td><strong>25% refund</strong></td>
+                  <td>
+                    Exceptional circumstances only (documented medical,
+                    bereavement, or relocation outside India)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>After 90 days</strong></td>
+                  <td><strong>No refund</strong></td>
+                  <td>Membership year considered fully used</td>
+                </tr>
+                <tr>
+                  <td><strong>Declined application</strong></td>
+                  <td><strong>100% refund</strong></td>
+                  <td>
+                    Application rejected by SIAWED during verification (within
+                    10 working days of payment)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Technical failure</strong></td>
+                  <td><strong>100% refund</strong></td>
+                  <td>
+                    Payment processed but membership not activated due to
+                    platform error
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              All refund amounts are exclusive of payment gateway charges
+              (typically 2–3%), which are non-recoverable by SIAWED.
+            </p>
+          </div>
+
+          <!-- 3 -->
+          <div class="doc-section" id="rp-3">
+            <h2><span class="sec-num">3</span>Refund Eligibility Criteria</h2>
+            <p>To be eligible for a refund, you must:</p>
+            <ul>
+              <li>
+                Submit a written refund request to
+                <a href="mailto:info@siawed.org">info@siawed.org</a> within the
+                applicable refund window.
+              </li>
+              <li>
+                Provide your full name, registered email address, membership ID,
+                and reason for cancellation.
+              </li>
+              <li>
+                For exceptional circumstance claims (31–90 days), provide
+                supporting documentation (e.g., medical certificate, death
+                certificate of immediate family, proof of relocation).
+              </li>
+              <li>
+                Not have been suspended or terminated for a Code of Conduct
+                violation.
+              </li>
+            </ul>
+          </div>
+
+          <!-- 4 -->
+          <div class="doc-section" id="rp-4">
+            <h2><span class="sec-num">4</span>Non-Refundable Items</h2>
+            <p>
+              The following are not eligible for refund under any circumstances:
+            </p>
+            <ul>
+              <li>
+                Membership fees where the member has been terminated for a
+                breach of Terms &amp; Conditions.
+              </li>
+              <li>
+                Event registration fees once the event has taken place (see
+                Section 8 for event cancellations by SIAWED).
+              </li>
+              <li>
+                Upgrade fees paid to move to a higher-tier plan, once the
+                upgraded benefits have been accessed.
+              </li>
+              <li>
+                Merchandise, printed materials, or physical kits delivered to
+                the member.
+              </li>
+              <li>
+                Fees paid for third-party workshops, training, or certifications
+                arranged by SIAWED (refund terms governed by the respective
+                provider).
+              </li>
+              <li>
+                WENBA listing fees (governed by WENBA's separate fee policy).
+              </li>
+            </ul>
+            <div class="highlight-box hb-warn">
+              <strong>Note on Renewal Fees</strong>
+              Renewal fees follow the same schedule as above, measured from the
+              renewal payment date. If you have accessed any renewed-year
+              benefit, the 50% window applies.
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="doc-section" id="rp-5">
+            <h2><span class="sec-num">5</span>How to Request a Refund</h2>
+            <ol>
+              <li>
+                Email <a href="mailto:info@siawed.org">info@siawed.org</a> with
+                the subject line:
+                <strong>"Refund Request – [Your Membership ID]"</strong>
+              </li>
+              <li>
+                Include the following in your email:
+                <ul style="margin-top: 8px">
+                  <li>Full name and registered email address</li>
+                  <li>Membership plan and payment date</li>
+                  <li>Reason for cancellation</li>
+                  <li>Supporting documents (for exceptional claims)</li>
+                  <li>
+                    Bank account details for refund transfer (account name,
+                    account number, IFSC code)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Our team will acknowledge your request within 2 working days.
+              </li>
+              <li>
+                A decision will be communicated within 7 working days of
+                receiving all required information.
+              </li>
+            </ol>
+          </div>
+
+          <!-- 6 -->
+          <div class="doc-section" id="rp-6">
+            <h2><span class="sec-num">6</span>Refund Processing Timeline</h2>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Stage</th>
+                  <th>Timeline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Acknowledgement of request</td>
+                  <td>2 working days</td>
+                </tr>
+                <tr>
+                  <td>Review and decision</td>
+                  <td>7 working days from complete request</td>
+                </tr>
+                <tr>
+                  <td>Refund initiation (approved claims)</td>
+                  <td>3 working days after approval</td>
+                </tr>
+                <tr>
+                  <td>Credit to bank account / original payment method</td>
+                  <td>
+                    5–10 working days after initiation (depends on your bank)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Refunds will be processed to the original payment method where
+              possible. If that is not feasible (e.g., the card has expired), a
+              NEFT bank transfer will be made to the details provided.
+            </p>
+          </div>
+
+          <!-- 7 -->
+          <div class="doc-section" id="rp-7">
+            <h2><span class="sec-num">7</span>Renewal Refunds</h2>
+            <p>
+              If you accidentally renew your membership and have not accessed
+              any renewed-year benefits, you may request a full refund within 48
+              hours of the renewal payment. Requests made after 48 hours of
+              renewal will follow the standard refund schedule in Section 2.
+            </p>
+          </div>
+
+          <!-- 8 -->
+          <div class="doc-section" id="rp-8">
+            <h2><span class="sec-num">8</span>Event Cancellations by SIAWED</h2>
+            <p>
+              If SIAWED cancels a paid event or program for which you have
+              separately registered:
+            </p>
+            <ul>
+              <li>
+                <strong>Cancelled by SIAWED:</strong> 100% refund of the event
+                fee within 10 working days.
+              </li>
+              <li>
+                <strong>Rescheduled by SIAWED:</strong> you may choose to attend
+                the rescheduled date or receive a 100% refund.
+              </li>
+              <li>
+                <strong>Participant cancellation (before event):</strong>
+                refunds are subject to the event's individual cancellation
+                policy, which will be stated at time of registration.
+              </li>
+            </ul>
+          </div>
+
+          <!-- 9 -->
+          <div class="doc-section" id="rp-9">
+            <h2>
+              <span class="sec-num">9</span>Plan Changes (Upgrades &amp;
+              Downgrades)
+            </h2>
+            <h3>9.1 Upgrades</h3>
+            <p>
+              When upgrading to a higher plan mid-year, you pay only the
+              pro-rated difference. If you request a downgrade after an upgrade,
+              the upgrade fee is non-refundable if any upgraded benefits were
+              accessed.
+            </p>
+            <h3>9.2 Downgrades</h3>
+            <p>
+              Plan downgrades take effect at the start of the next Membership
+              Year. No refund is given for the difference in fees during the
+              current year. You will continue to receive current-plan benefits
+              until renewal.
+            </p>
+          </div>
+
+          <!-- 10 -->
+          <div class="doc-section" id="rp-10">
+            <h2><span class="sec-num">10</span>Dispute Resolution</h2>
+            <p>
+              If you are unhappy with a refund decision, you may escalate to the
+              SIAWED President's office within 14 days of the decision by
+              emailing <a href="mailto:info@siawed.org">info@siawed.org</a> with
+              the subject line
+              <strong>"Refund Dispute – [Membership ID]"</strong>. The
+              President's decision is final and binding. Persistent disputes
+              will be subject to the dispute resolution provisions in SIAWED's
+              Terms &amp; Conditions.
+            </p>
+          </div>
+
+          <!-- 11 -->
+          <div class="doc-section" id="rp-11">
+            <h2><span class="sec-num">11</span>Contact</h2>
+            <div class="contact-block">
+              <h4>SIAWED Membership &amp; Refunds Team</h4>
+              <div class="contact-row">
+                <span class="ci">✉</span
+                ><span
+                  ><a href="mailto:info@siawed.org">info@siawed.org</a></span
+                >
+              </div>
+              <div class="contact-row">
+                <span class="ci">📞</span
+                ><span>044 4351 4334 (Mon–Fri, 10 AM – 5 PM IST)</span>
+              </div>
+              <div class="contact-row">
+                <span class="ci">📍</span
+                ><span
+                  >601 "DEEPA", Choolaimedu High Road, Chennai – 600094</span
+                >
+              </div>
+              <p style="margin-top: 12px; font-size: 13px; color: var(--slate)">
+                Please allow up to 2 working days for a response. Include your
+                <strong>Membership ID</strong> in all correspondence.
+              </p>
+            </div>
+          </div>
+
+          <div class="sig-block">
+            <div class="sig-left">
+              <strong>Ms T Vanadhi Devi</strong>
+              Founder &amp; President, SIAWED<br />
+              Chennai, Tamil Nadu, India
+            </div>
+            <div class="sig-right">
+              <div class="rev-date">Effective: 1 July 2026</div>
+              Version 1.0 | Review due: July 2027
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!-- /tab-refund -->
+
+    <!-- FOOTER -->
+    <div class="site-footer">
+      © 2026 SIAWED — Southern Industrial Academy for Women Entrepreneurs
+      Development, Chennai.
+      <span style="margin: 0 8px">|</span>
+      <a href="index.html">Home</a>
+      <span style="margin: 0 8px">·</span>
+      <a href="mailto:info@siawed.org">info@siawed.org</a>
+      <span style="margin: 0 8px">·</span>
+      <a href="tel:+914443514334">044 4351 4334</a>
+    </div>
+
+    <script>
+      function showTab(id, btn) {
+        // Hide all tabs
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".doc-badge")
+          .forEach((b) => b.classList.remove("active"));
+        // Show selected
+        document.getElementById("tab-" + id).classList.add("active");
+        btn.classList.add("active");
+        // Scroll to top of content
+        window.scrollTo({
+          top: document.querySelector(".page-wrap").offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,515 @@
+.FocusedActionsSection {
+  padding: 100px 0;
+  background-color: $color_1; // Dark green background
+  // Chevron/pattern look using css linear gradient patterns
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.015) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.015) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.015) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(255, 255, 255, 0.015) 25%, $color_1 25%);
+  background-position:
+    40px 0,
+    40px 0,
+    0 0,
+    0 0;
+  background-size: 80px 80px;
+  background-repeat: repeat;
+  position: relative;
+  overflow: hidden;
+
+  .wrap {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    gap: 70px;
+
+    .left {
+      .collageContainer {
+        position: relative;
+        min-height: 600px;
+        width: 100%;
+
+        .cardVolunteers {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 3;
+          width: 200px;
+          padding: 16px;
+          border-radius: 12px;
+          background: #ffffff;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+          .cardTitle {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0b0b0b;
+            line-height: 1.3;
+          }
+
+          .avatarsRow {
+            display: flex;
+            margin-top: 10px;
+
+            .avatar {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              border: 2px solid #ffffff;
+              margin-right: -8px;
+              object-fit: cover;
+
+              &:last-child {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+
+        .imgTopRight {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50%;
+          height: 240px;
+          z-index: 1;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+          }
+        }
+
+        .imgMiddleLeft {
+          position: absolute;
+          top: 140px;
+          left: 0;
+          width: 53%;
+          height: 290px;
+          z-index: 1;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+          }
+        }
+
+        .imgMain {
+          position: absolute;
+          top: 190px;
+
+          right: -20px;
+          height: 350px;
+          aspect-ratio: 1 / 1;
+          z-index: 2;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+          }
+        }
+
+        .cardProjects {
+          position: absolute;
+          bottom: 80px;
+          @include respond-below(md) {
+            bottom: unset;
+            top: 100px;
+          }
+          left: 0;
+          z-index: 3;
+          width: 220px;
+          padding: 12px 18px;
+          border-radius: 12px;
+          background: #ffffff;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .iconCircle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: $color_2;
+            border-radius: 50%;
+
+            .gridIcon {
+              font-size: 16px;
+              color: #000000;
+            }
+          }
+
+          .projectsInfo {
+            display: flex;
+            flex-direction: column;
+
+            h4 {
+              font-size: 18px;
+              font-weight: 800;
+              color: #0b0b0b;
+              margin: 0;
+            }
+
+            p {
+              font-size: 12px;
+              color: #718096;
+              margin: 0;
+            }
+          }
+        }
+
+        .wenbaLogoCard {
+          position: absolute;
+          top: 250px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 5;
+          background: rgba(255, 255, 255, 0.95);
+          padding: 15px 25px;
+          border-radius: 16px;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+          border: 2px solid $color_2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          animation: float 4s ease-in-out infinite;
+
+          .wenbaLogoImg {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+          }
+
+          @keyframes float {
+            0% {
+              transform: translate(-50%, 0px);
+            }
+            50% {
+              transform: translate(-50%, -10px);
+            }
+            100% {
+              transform: translate(-50%, 0px);
+            }
+          }
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+        padding: 6px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 20px; // Add spacing below badge
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          background-color: $color_2;
+          border-radius: 50%;
+          margin-right: 8px;
+        }
+      }
+
+      .title {
+        font-size: 48px;
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 1.15;
+        margin: 0 0 20px 0;
+        letter-spacing: -0.5px;
+      }
+
+      .description {
+        font-size: 16px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 35px;
+      }
+
+      .tabsRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 20px;
+        width: 100%;
+
+        .tabBtn {
+          padding: 10px 24px;
+          border-radius: 50px;
+          border: none;
+          background: rgba(255, 255, 255, 0.06);
+          color: #ffffff;
+          font-weight: 600;
+          font-size: 15px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.12);
+          }
+
+          &.active {
+            background-color: $color_2;
+            color: #000000;
+          }
+        }
+      }
+
+      .dynamicContent {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+        width: 100%;
+        animation: fadeIn 0.4s ease forwards;
+
+        .contentIconContainer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 50px;
+          height: 50px;
+          min-width: 50px;
+          background-color: $color_2;
+          border-radius: 50%;
+
+          .icon {
+            font-size: 24px;
+            color: #000000;
+          }
+        }
+
+        .contentText {
+          .contentTitle {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+          }
+
+          .contentDescription {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+          }
+        }
+      }
+
+      .buttonWrapper {
+        .contactBtn {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background-color: $color_2;
+          color: #000000;
+          font-weight: 700;
+          font-size: 16px;
+          padding: 14px 32px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          .arrow {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(250, 212, 89, 0.35);
+
+            .arrow {
+              transform: translate(2px, -2px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bottomNote {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 30px;
+
+    .noteAvatarWrapper {
+      position: relative;
+      width: 48px;
+      height: 48px;
+
+      .noteAvatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .phoneBadge {
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        width: 18px;
+        height: 18px;
+        background-color: $color_2;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid $color_1;
+
+        .phoneIcon {
+          font-size: 9px;
+          color: #000000;
+        }
+      }
+    }
+
+    .noteText {
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+
+      a {
+        color: $color_2;
+        font-weight: 700;
+        text-decoration: underline;
+
+        &:hover {
+          color: lighten($color_2, 10%);
+        }
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @include respond-below(lg) {
+    .wrap {
+      gap: 40px;
+
+      .title {
+        font-size: 40px;
+      }
+
+      .left {
+        .collageContainer {
+          min-height: 500px;
+
+          .imgTopRight {
+            height: 200px;
+          }
+
+          .imgMiddleLeft {
+            height: 230px;
+          }
+
+          .imgMain {
+            height: 320px;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond-below(md) {
+    padding: 70px 0;
+
+    .wrap {
+      grid-template-columns: 1fr;
+      gap: 60px;
+
+      .title {
+        font-size: 36px;
+      }
+
+      .left {
+        .collageContainer {
+          min-height: 520px;
+          max-width: 550px;
+          margin: 0 auto;
+
+          .imgTopRight {
+            height: 220px;
+          }
+
+          .imgMiddleLeft {
+            height: 250px;
+          }
+
+          .imgMain {
+            height: 340px;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond-below(sm) {
+    .wrap {
+      .left {
+        .collageContainer {
+          min-height: 400px;
+
+          .cardVolunteers {
+            width: 170px;
+            padding: 12px;
+          }
+
+          .cardProjects {
+            width: 190px;
+            padding: 10px 12px;
+          }
+
+          .imgTopRight {
+            height: 170px;
+          }
+
+          .imgMiddleLeft {
+            height: 200px;
+          }
+
+          .imgMain {
+            height: 260px;
+          }
+        }
+      }
+    }
+  }
+}

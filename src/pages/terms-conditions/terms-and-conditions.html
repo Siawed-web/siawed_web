@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SIAWED – Membership Policies</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --blue: #1a6fa8;
+        --blue-deep: #0e4d7a;
+        --blue-light: #eaf4fb;
+        --orange: #e8701a;
+        --orange-light: #fef3e7;
+        --teal: #0d7a6e;
+        --teal-light: #e0f5f2;
+        --ivory: #f9f7f3;
+        --parchment: #f1ebe0;
+        --mist: #e2d9ce;
+        --charcoal: #1c1c1c;
+        --slate: #4a4a4a;
+        --white: #fff;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Nunito Sans", sans-serif;
+        background: var(--ivory);
+        color: var(--charcoal);
+        line-height: 1.6;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ── TOPBAR ── */
+      .topbar {
+        background: var(--blue-deep);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 6px 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .topbar a {
+        color: rgba(255, 255, 255, 0.75);
+      }
+      @media (max-width: 768px) {
+        .topbar {
+          display: none;
+        }
+      }
+
+      /* ── NAV ── */
+      .nav {
+        background: var(--white);
+        border-bottom: 2px solid var(--mist);
+        padding: 0 52px;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-logo img {
+        height: 50px;
+        width: auto;
+      }
+      .nav-back {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--blue);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      @media (max-width: 600px) {
+        .nav {
+          padding: 0 18px;
+        }
+      }
+
+      /* ── PAGE HERO ── */
+      .page-hero {
+        background: var(--blue-deep);
+        padding: 56px 52px 52px;
+        text-align: center;
+      }
+      .page-hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 48px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 14px;
+      }
+      .page-hero p {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.72);
+        max-width: 580px;
+        margin: 0 auto 24px;
+      }
+      .doc-badges {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .doc-badge {
+        padding: 7px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        transition: all 0.2s;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .doc-badge:hover,
+      .doc-badge.active {
+        background: var(--orange);
+        border-color: var(--orange);
+        color: #fff;
+      }
+
+      /* ── TAB CONTENT ── */
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      /* ── LAYOUT ── */
+      .page-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 56px 40px 80px;
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .page-wrap {
+          grid-template-columns: 1fr;
+          padding: 40px 22px 60px;
+        }
+      }
+
+      /* ── SIDEBAR TOC ── */
+      .toc {
+        position: sticky;
+        top: 88px;
+        background: var(--white);
+        border: 1px solid var(--mist);
+        border-radius: 10px;
+        padding: 20px;
+        font-size: 13px;
+      }
+      .toc-title {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--orange);
+        margin-bottom: 14px;
+      }
+      .toc ol {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .toc ol li a {
+        color: var(--slate);
+        font-weight: 600;
+        transition: color 0.15s;
+        display: block;
+        padding: 3px 0 3px 10px;
+        border-left: 2px solid transparent;
+        font-size: 12.5px;
+      }
+      .toc ol li a:hover {
+        color: var(--blue);
+        border-left-color: var(--blue);
+        text-decoration: none;
+      }
+      .toc-eff {
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid var(--mist);
+        font-size: 11.5px;
+        color: var(--slate);
+      }
+      .toc-eff strong {
+        color: var(--charcoal);
+        display: block;
+        margin-bottom: 3px;
+      }
+      @media (max-width: 900px) {
+        .toc {
+          display: none;
+        }
+      }
+
+      /* ── DOCUMENT BODY ── */
+      .doc {
+        background: var(--white);
+        border: 1px solid var(--mist);
+        border-radius: 10px;
+        padding: 48px 52px;
+      }
+      @media (max-width: 600px) {
+        .doc {
+          padding: 28px 22px;
+        }
+      }
+
+      .doc-intro {
+        background: var(--blue-light);
+        border-left: 4px solid var(--blue);
+        border-radius: 0 8px 8px 0;
+        padding: 16px 20px;
+        margin-bottom: 36px;
+        font-size: 14px;
+        color: var(--slate);
+        line-height: 1.75;
+      }
+      .doc-intro strong {
+        color: var(--blue);
+      }
+
+      /* Section */
+      .doc-section {
+        margin-bottom: 40px;
+        scroll-margin-top: 100px;
+      }
+      .doc-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .doc-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--mist);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .doc-section h2 .sec-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        font-family: "Nunito Sans", sans-serif;
+        flex-shrink: 0;
+      }
+
+      .doc-section h3 {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--charcoal);
+        margin: 22px 0 10px;
+      }
+      .doc-section p {
+        font-size: 14px;
+        line-height: 1.82;
+        color: var(--slate);
+        margin-bottom: 14px;
+      }
+      .doc-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Lists */
+      .doc-section ul,
+      .doc-section ol {
+        padding-left: 0;
+        margin: 10px 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .doc-section ul li,
+      .doc-section ol li {
+        font-size: 14px;
+        line-height: 1.75;
+        color: var(--slate);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .doc-section ul li::before {
+        content: "•";
+        color: var(--blue);
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .doc-section ol {
+        counter-reset: ol-counter;
+        list-style: none;
+      }
+      .doc-section ol li {
+        counter-increment: ol-counter;
+      }
+      .doc-section ol li::before {
+        content: counter(ol-counter) ".";
+        color: var(--blue);
+        font-weight: 800;
+        font-size: 13px;
+        flex-shrink: 0;
+        min-width: 20px;
+      }
+
+      /* Table */
+      .policy-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0 20px;
+        font-size: 13.5px;
+      }
+      .policy-table th {
+        background: var(--blue);
+        color: #fff;
+        padding: 11px 14px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .policy-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--mist);
+        color: var(--slate);
+        vertical-align: top;
+      }
+      .policy-table tr:nth-child(even) td {
+        background: var(--ivory);
+      }
+      .policy-table .tag {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .tag-yes {
+        background: var(--teal-light);
+        color: var(--teal);
+      }
+      .tag-no {
+        background: #fde8e8;
+        color: #c0392b;
+      }
+      .tag-partial {
+        background: var(--orange-light);
+        color: var(--orange);
+      }
+
+      /* Highlight box */
+      .highlight-box {
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin: 18px 0;
+        font-size: 13.5px;
+        line-height: 1.75;
+      }
+      .hb-blue {
+        background: var(--blue-light);
+        border-left: 4px solid var(--blue);
+      }
+      .hb-orange {
+        background: var(--orange-light);
+        border-left: 4px solid var(--orange);
+      }
+      .hb-teal {
+        background: var(--teal-light);
+        border-left: 4px solid var(--teal);
+      }
+      .hb-warn {
+        background: #fff8e1;
+        border-left: 4px solid #f0a500;
+      }
+      .highlight-box strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+        opacity: 0.7;
+      }
+
+      /* Contact block */
+      .contact-block {
+        background: var(--parchment);
+        border: 1px solid var(--mist);
+        border-radius: 8px;
+        padding: 20px 24px;
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      .contact-block h4 {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--charcoal);
+        margin-bottom: 12px;
+      }
+      .contact-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: var(--slate);
+      }
+      .contact-row .ci {
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* Signature block */
+      .sig-block {
+        margin-top: 48px;
+        padding-top: 28px;
+        border-top: 2px solid var(--mist);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .sig-left {
+        font-size: 13px;
+        color: var(--slate);
+        line-height: 1.7;
+      }
+      .sig-left strong {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--charcoal);
+        display: block;
+        margin-bottom: 3px;
+      }
+      .sig-right {
+        text-align: right;
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .sig-right .rev-date {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--orange);
+      }
+
+      /* Print button */
+      .print-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.18s;
+        font-family: "Nunito Sans", sans-serif;
+      }
+      .btn-outline {
+        border-color: var(--mist);
+        color: var(--slate);
+        background: transparent;
+      }
+      .btn-outline:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+      .btn-blue {
+        background: var(--blue);
+        color: #fff;
+        border-color: var(--blue);
+      }
+      .btn-blue:hover {
+        background: var(--blue-deep);
+      }
+      .btn-orange {
+        background: var(--orange);
+        color: #fff;
+        border-color: var(--orange);
+      }
+      .btn-orange:hover {
+        background: #c45c10;
+      }
+
+      /* Footer */
+      .site-footer {
+        background: var(--charcoal);
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        padding: 28px 40px;
+        font-size: 12.5px;
+      }
+      .site-footer a {
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .site-footer a:hover {
+        color: #fff;
+      }
+
+      @media print {
+        .topbar,
+        .nav,
+        .doc-badges,
+        .print-row,
+        .toc,
+        .site-footer {
+          display: none !important;
+        }
+        .page-wrap {
+          grid-template-columns: 1fr;
+          padding: 0;
+        }
+        .doc {
+          border: none;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <h1>Membership Policies</h1>
+      <p>
+        Please read these documents carefully before registering as a SIAWED
+        member. By joining, you agree to all terms outlined below.
+      </p>
+      <div class="doc-badges">
+        <button class="doc-badge active" onclick="showTab('tnc', this)">
+          Terms &amp; Conditions
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+     TAB 1 — TERMS AND CONDITIONS
+══════════════════════════════════════════ -->
+    <div id="tab-tnc" class="tab-content active">
+      <div class="page-wrap">
+        <!-- Sidebar TOC -->
+        <aside class="toc">
+          <div class="toc-title">Contents</div>
+          <ol>
+            <li><a href="#tnc-1">Definitions</a></li>
+            <li><a href="#tnc-2">Eligibility</a></li>
+            <li><a href="#tnc-3">Membership Tiers</a></li>
+            <li><a href="#tnc-4">Registration</a></li>
+            <li><a href="#tnc-5">Fees &amp; Payment</a></li>
+            <li><a href="#tnc-6">Member Conduct</a></li>
+            <li><a href="#tnc-7">Benefits &amp; Services</a></li>
+            <li><a href="#tnc-8">WENBA Marketplace</a></li>
+            <li><a href="#tnc-9">Intellectual Property</a></li>
+            <li><a href="#tnc-10">Suspension &amp; Termination</a></li>
+            <li><a href="#tnc-11">Liability</a></li>
+            <li><a href="#tnc-12">Governing Law</a></li>
+            <li><a href="#tnc-13">Amendments</a></li>
+            <li><a href="#tnc-14">Contact</a></li>
+          </ol>
+          <div class="toc-eff">
+            <strong>Effective Date</strong>
+            1 July 2026
+            <br /><br />
+            <strong>Version</strong>
+            1.0
+          </div>
+        </aside>
+
+        <!-- Document -->
+        <main class="doc">
+          <div class="print-row">
+            <button class="btn btn-outline" onclick="window.print()">
+              🖨️ Print
+            </button>
+          </div>
+
+          <div class="doc-intro">
+            <strong>SIAWED Membership Terms &amp; Conditions</strong>
+            These Terms and Conditions ("Terms") govern membership with the
+            <strong
+              >Southern Industrial Academy for Women Entrepreneurs
+              Development</strong
+            >
+            ("SIAWED", "we", "us", "our"), a not-for-profit organisation
+            registered in Chennai, Tamil Nadu, India. By registering as a
+            member, you ("Member", "you") agree to be bound by these Terms in
+            full.
+          </div>
+
+          <!-- 1 -->
+          <div class="doc-section" id="tnc-1">
+            <h2><span class="sec-num">1</span>Definitions</h2>
+            <ul>
+              <li>
+                <strong>"SIAWED"</strong> refers to the Southern Industrial
+                Academy for Women Entrepreneurs Development, its officers,
+                staff, and authorised representatives.
+              </li>
+              <li>
+                <strong>"Member"</strong> refers to any individual, group, or
+                organisation that has completed SIAWED's registration process
+                and paid the applicable membership fee.
+              </li>
+              <li>
+                <strong>"Membership Plan"</strong> refers to one of the five
+                tiered membership categories offered by SIAWED.
+              </li>
+              <li>
+                <strong>"WENBA"</strong> refers to the Women Entrepreneurs
+                Native Business Association, SIAWED's associated marketplace
+                platform at wenba.in.
+              </li>
+              <li>
+                <strong>"Membership Year"</strong> means a period of twelve (12)
+                calendar months from the date of successful registration.
+              </li>
+              <li>
+                <strong>"Portal"</strong> refers to SIAWED's official website
+                (www.siawed.org) and any associated member login system.
+              </li>
+            </ul>
+          </div>
+
+          <!-- 2 -->
+          <div class="doc-section" id="tnc-2">
+            <h2><span class="sec-num">2</span>Eligibility</h2>
+            <p>
+              SIAWED membership is open to the following, subject to
+              plan-specific requirements:
+            </p>
+            <ul>
+              <li>
+                Women who are Indian citizens or residents aged 18 years and
+                above.
+              </li>
+              <li>
+                Students enrolled in recognised colleges or universities (Early
+                Explorer plan only).
+              </li>
+              <li>
+                Registered businesses, self-help groups (SHGs), or artisan
+                collectives owned or led by women.
+              </li>
+              <li>
+                Indian-registered companies applying for the Corporate Partner
+                plan.
+              </li>
+            </ul>
+            <div class="highlight-box hb-blue">
+              <strong>Note</strong>
+              SIAWED reserves the right to verify eligibility at any point.
+              Applications that do not meet eligibility criteria may be declined
+              or cancelled, with a full refund of fees paid.
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="doc-section" id="tnc-3">
+            <h2><span class="sec-num">3</span>Membership Tiers</h2>
+            <p>
+              SIAWED offers five membership plans. Benefits and fees are as
+              follows:
+            </p>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Plan</th>
+                  <th>Target Group</th>
+                  <th>Annual Fee</th>
+                  <th>WENBA Access</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Early Explorer</strong></td>
+                  <td>Students &amp; Startups</td>
+                  <td>₹1,000</td>
+                  <td><span class="tag tag-partial">Limited</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Homepreneur</strong></td>
+                  <td>Home-based businesses</td>
+                  <td>₹3,000</td>
+                  <td><span class="tag tag-yes">Full</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Growth Leader</strong></td>
+                  <td>SMEs &amp; Established businesses</td>
+                  <td>₹5,000</td>
+                  <td><span class="tag tag-yes">Full</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Impact Maker</strong></td>
+                  <td>Diamond members &amp; Mentors</td>
+                  <td>₹10,000</td>
+                  <td><span class="tag tag-yes">Full + Featured</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Corporate Partner</strong></td>
+                  <td>Companies &amp; Corporates</td>
+                  <td>₹25,000</td>
+                  <td><span class="tag tag-yes">Procurement</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              SIAWED reserves the right to revise plan inclusions with 30 days'
+              prior written notice to existing members. Fee changes take effect
+              from the next renewal cycle only.
+            </p>
+          </div>
+
+          <!-- 4 -->
+          <div class="doc-section" id="tnc-4">
+            <h2><span class="sec-num">4</span>Registration Process</h2>
+            <ol>
+              <li>
+                Complete the online application form at
+                www.siawed.org/membership with accurate, truthful information.
+              </li>
+              <li>
+                Upload required supporting documents (proof of identity,
+                business registration, or student ID as applicable).
+              </li>
+              <li>
+                Pay the applicable membership fee through the payment gateway.
+              </li>
+              <li>
+                Receive confirmation of membership via email within 3–5 working
+                days of successful verification.
+              </li>
+            </ol>
+            <p>
+              Membership is not confirmed until payment is received and
+              documents are verified. Submitting false or misleading information
+              will result in immediate cancellation without refund.
+            </p>
+          </div>
+
+          <!-- 5 -->
+          <div class="doc-section" id="tnc-5">
+            <h2><span class="sec-num">5</span>Fees &amp; Payment</h2>
+            <h3>5.1 Payment</h3>
+            <p>
+              All membership fees are payable in Indian Rupees (INR) and are
+              inclusive of applicable GST. Payments may be made via credit/debit
+              card, UPI, net banking, or other methods available on the Portal.
+            </p>
+            <h3>5.2 Renewal</h3>
+            <p>
+              Memberships are valid for one year from the date of activation.
+              SIAWED will send renewal reminders 30 days before expiry. Failure
+              to renew will result in loss of member benefits and WENBA access.
+            </p>
+            <h3>5.3 Upgrades</h3>
+            <p>
+              Members may upgrade to a higher plan at any time by paying the
+              difference in fees pro-rated to the remaining membership period.
+              Downgrades take effect at the next renewal.
+            </p>
+            <div class="highlight-box hb-warn">
+              <strong>Important</strong>
+              Membership fees are non-transferable. A membership cannot be
+              transferred to another individual or entity under any
+              circumstances.
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="doc-section" id="tnc-6">
+            <h2><span class="sec-num">6</span>Member Conduct</h2>
+            <p>
+              All members are expected to uphold SIAWED's values of integrity,
+              inclusivity, and empowerment. Members must not:
+            </p>
+            <ul>
+              <li>
+                Use SIAWED's name, logo, or membership status to make false,
+                misleading, or defamatory claims.
+              </li>
+              <li>
+                Engage in discrimination, harassment, or any form of harmful
+                behaviour towards fellow members, SIAWED staff, or event
+                attendees.
+              </li>
+              <li>
+                Solicit other members for commercial purposes without prior
+                written approval from SIAWED.
+              </li>
+              <li>
+                Share login credentials, membership certificates, or member-only
+                content with non-members.
+              </li>
+              <li>
+                Conduct any activity that violates Indian law, including but not
+                limited to fraud, money laundering, or intellectual property
+                infringement.
+              </li>
+              <li>
+                Use the WENBA platform to list counterfeit, prohibited, or
+                misleadingly described products or services.
+              </li>
+            </ul>
+            <p>
+              Violations may result in suspension or permanent termination of
+              membership without refund.
+            </p>
+          </div>
+
+          <!-- 7 -->
+          <div class="doc-section" id="tnc-7">
+            <h2><span class="sec-num">7</span>Benefits &amp; Services</h2>
+            <p>
+              SIAWED will make reasonable efforts to deliver all stated benefits
+              for the Member's chosen plan. However, SIAWED does not guarantee:
+            </p>
+            <ul>
+              <li>
+                Specific business outcomes, sales, or revenue as a result of
+                membership.
+              </li>
+              <li>
+                Attendance at events or programs due to capacity limitations
+                (priority given on first-come basis).
+              </li>
+              <li>
+                Continuous, uninterrupted access to the Portal or WENBA
+                platform.
+              </li>
+            </ul>
+            <p>
+              SIAWED reserves the right to modify, add, or remove specific
+              benefits at any time with reasonable notice, provided the core
+              value of the membership plan is maintained.
+            </p>
+          </div>
+
+          <!-- 8 -->
+          <div class="doc-section" id="tnc-8">
+            <h2><span class="sec-num">8</span>WENBA Marketplace Access</h2>
+            <p>
+              Members with WENBA access rights may list their products or
+              services on the WENBA platform subject to WENBA's separate Vendor
+              Terms. SIAWED is not responsible for transactions, disputes, or
+              outcomes arising directly between vendors and buyers on WENBA.
+              Members are solely responsible for the accuracy of their listings
+              and compliance with applicable laws including GST, consumer
+              protection, and food safety regulations where relevant.
+            </p>
+          </div>
+
+          <!-- 9 -->
+          <div class="doc-section" id="tnc-9">
+            <h2><span class="sec-num">9</span>Intellectual Property</h2>
+            <p>
+              SIAWED retains all rights to its name, logo, branding, course
+              materials, event content, and platform. Members are granted a
+              limited, non-exclusive, non-transferable licence to use the SIAWED
+              member badge solely to indicate their current membership status.
+              This licence expires immediately upon termination or expiry of
+              membership.
+            </p>
+            <p>
+              Members grant SIAWED a royalty-free licence to use their name,
+              photograph, and business description in SIAWED's promotional
+              materials, website, social media, and publications, unless the
+              member provides written opt-out notice.
+            </p>
+          </div>
+
+          <!-- 10 -->
+          <div class="doc-section" id="tnc-10">
+            <h2><span class="sec-num">10</span>Suspension &amp; Termination</h2>
+            <h3>10.1 By SIAWED</h3>
+            <p>
+              SIAWED may suspend or terminate membership with written notice
+              for: breach of these Terms, non-payment, fraudulent registration,
+              or conduct detrimental to SIAWED's mission. Suspended members will
+              not receive a refund.
+            </p>
+            <h3>10.2 By the Member</h3>
+            <p>
+              Members may cancel their membership at any time by written notice
+              to info@siawed.org. Refunds are subject to the Refund Policy (see
+              separate document).
+            </p>
+          </div>
+
+          <!-- 11 -->
+          <div class="doc-section" id="tnc-11">
+            <h2><span class="sec-num">11</span>Limitation of Liability</h2>
+            <p>
+              To the maximum extent permitted by applicable law, SIAWED shall
+              not be liable for any indirect, incidental, consequential, or
+              special damages arising from membership, use of the Portal or
+              WENBA platform, attendance at events, or reliance on information
+              provided through SIAWED programs. SIAWED's total aggregate
+              liability to any member shall not exceed the membership fee paid
+              by that member in the current Membership Year.
+            </p>
+          </div>
+
+          <!-- 12 -->
+          <div class="doc-section" id="tnc-12">
+            <h2>
+              <span class="sec-num">12</span>Governing Law &amp; Dispute
+              Resolution
+            </h2>
+            <p>
+              These Terms are governed by the laws of India. Any disputes
+              arising from or relating to these Terms or membership shall first
+              be attempted to be resolved amicably. If unresolved within 30
+              days, disputes shall be subject to the exclusive jurisdiction of
+              the courts in Chennai, Tamil Nadu.
+            </p>
+          </div>
+
+          <!-- 13 -->
+          <div class="doc-section" id="tnc-13">
+            <h2><span class="sec-num">13</span>Amendments</h2>
+            <p>
+              SIAWED may revise these Terms at any time. Members will be
+              notified of material changes by email at least 14 days before the
+              changes take effect. Continued use of membership benefits after
+              notification constitutes acceptance of the revised Terms.
+            </p>
+          </div>
+
+          <!-- 14 -->
+          <div class="doc-section" id="tnc-14">
+            <h2><span class="sec-num">14</span>Contact Us</h2>
+            <div class="contact-block">
+              <h4>SIAWED Membership Team</h4>
+              <div class="contact-row">
+                <span class="ci">📍</span
+                ><span
+                  >601 "DEEPA", Chitra Avenue, Choolaimedu High Road, Chennai –
+                  600094</span
+                >
+              </div>
+              <div class="contact-row">
+                <span class="ci">📞</span
+                ><span>044 4351 4334 | 6381814441</span>
+              </div>
+              <div class="contact-row">
+                <span class="ci">✉</span
+                ><span
+                  ><a href="mailto:info@siawed.org">info@siawed.org</a></span
+                >
+              </div>
+              <div class="contact-row">
+                <span class="ci">🌐</span
+                ><span
+                  ><a href="http://www.siawed.org" target="_blank"
+                    >www.siawed.org</a
+                  ></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Signature block -->
+          <div class="sig-block">
+            <div class="sig-left">
+              <strong>Ms T Vanadhi Devi</strong>
+              Founder &amp; President, SIAWED<br />
+              Southern Industrial Academy for Women Entrepreneurs Development<br />
+              Chennai, Tamil Nadu, India
+            </div>
+            <div class="sig-right">
+              <div class="rev-date">Effective: 1 July 2026</div>
+              Version 1.0 | Review due: July 2027
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="site-footer">
+      © 2026 SIAWED — Southern Industrial Academy for Women Entrepreneurs
+      Development, Chennai.
+      <span style="margin: 0 8px">|</span>
+      <a href="index.html">Home</a>
+      <span style="margin: 0 8px">·</span>
+      <a href="mailto:info@siawed.org">info@siawed.org</a>
+      <span style="margin: 0 8px">·</span>
+      <a href="tel:+914443514334">044 4351 4334</a>
+    </div>
+
+    <script>
+      function showTab(id, btn) {
+        // Hide all tabs
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".doc-badge")
+          .forEach((b) => b.classList.remove("active"));
+        // Show selected
+        document.getElementById("tab-" + id).classList.add("active");
+        btn.classList.add("active");
+        // Scroll to top of content
+        window.scrollTo({
+          top: document.querySelector(".page-wrap").offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
