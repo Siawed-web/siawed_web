@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { Form, FloatingLabel, Modal, Spinner } from "react-bootstrap";
-import { HeartFill, PersonBoundingBox, BookHalf, StarFill, CreditCard, Bank2, Wallet2, QrCodeScan } from "react-bootstrap-icons";
+import {
+  HeartFill,
+  PersonBoundingBox,
+  BookHalf,
+  StarFill,
+  CreditCard,
+  Bank2,
+  Wallet2,
+  QrCodeScan,
+} from "react-bootstrap-icons";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabaseClient";
@@ -10,16 +19,25 @@ import CustomButton from "@/components/ui/custom_button/custom_button";
 
 const predefinedImpacts = [
   { value: 500, label: "Feeds one family", icon: <HeartFill /> },
-  { value: 1000, label: "Supports skill development", icon: <PersonBoundingBox /> },
-  { value: 2500, label: "Provides educational resources", icon: <BookHalf />, recommended: true },
+  {
+    value: 1000,
+    label: "Supports skill development",
+    icon: <PersonBoundingBox />,
+  },
+  {
+    value: 2500,
+    label: "Provides educational resources",
+    icon: <BookHalf />,
+    recommended: true,
+  },
   { value: 5000, label: "Empowers a woman entrepreneur", icon: <StarFill /> },
 ];
 
 const paymentMethods = [
-  { id: 'upi', label: 'UPI', icon: <QrCodeScan /> },
-  { id: 'card', label: 'Card', icon: <CreditCard /> },
-  { id: 'netbanking', label: 'Net Banking', icon: <Bank2 /> },
-  { id: 'wallet', label: 'Wallet', icon: <Wallet2 /> },
+  { id: "upi", label: "UPI", icon: <QrCodeScan /> },
+  { id: "card", label: "Card", icon: <CreditCard /> },
+  { id: "netbanking", label: "Net Banking", icon: <Bank2 /> },
+  { id: "wallet", label: "Wallet", icon: <Wallet2 /> },
 ];
 
 const DonationWizard = () => {
@@ -30,8 +48,14 @@ const DonationWizard = () => {
   const [customVal, setCustomVal] = useState("");
   const [payMethod, setPayMethod] = useState("upi");
   const [donationCause, setDonationCause] = useState("Social cause");
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', pan: '', anonymous: false });
-  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    pan: "",
+    anonymous: false,
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showQrModal, setShowQrModal] = useState(false);
   const [submittedDonationId, setSubmittedDonationId] = useState(null);
@@ -48,26 +72,48 @@ const DonationWizard = () => {
     setIsCustom(true);
   };
 
+  const sendMail = async () => {
+    try {
+      const res = await fetch("/api/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          type: "donation",
+        }),
+      });
+
+      const data = await res.json();
+
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const payload = {
         frequency,
         amount,
-        pay_method: 'QR Code', // Defaulted since the UI selection was removed
+        pay_method: "QR Code", // Defaulted since the UI selection was removed
         donation_cause: donationCause,
         donor_name: formData.name,
         email: formData.email,
         phone: formData.phone,
         pan: formData.pan,
         is_anonymous: formData.anonymous,
-        status: 'Pending'
+        status: "Pending",
       };
 
       const { data, error } = await supabase
-        .from('donations')
+        .from("donations")
         .insert([payload])
         .select();
 
@@ -75,10 +121,11 @@ const DonationWizard = () => {
 
       setSubmittedDonationId(data[0].id);
       setShowQrModal(true);
-
     } catch (error) {
       console.error(error);
-      toast.error(error.message || "An error occurred while processing your donation.");
+      toast.error(
+        error.message || "An error occurred while processing your donation.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -88,18 +135,25 @@ const DonationWizard = () => {
     try {
       if (submittedDonationId) {
         await supabase
-          .from('donations')
-          .update({ status: 'Paid' })
-          .eq('id', submittedDonationId);
+          .from("donations")
+          .update({ status: "Paid" })
+          .eq("id", submittedDonationId);
       }
-      
+
       setShowQrModal(false);
-      toast.success("Thank you for your generous donation! We will contact you soon.");
+      toast.success(
+        "Thank you for your generous donation! We will contact you soon.",
+      );
+
+      sendMail()
+
       router.push("/");
     } catch (error) {
       console.error("Error updating payment status", error);
       setShowQrModal(false);
-      toast.success("Thank you for your generous donation! We will contact you soon.");
+      toast.success(
+        "Thank you for your generous donation! We will contact you soon.",
+      );
       router.push("/");
     }
   };
@@ -109,21 +163,38 @@ const DonationWizard = () => {
       <CustomContainer>
         <div className={styles.wizardContainer} data-aos="fade-up">
           <h2 className={styles.wizardTitle}>Choose Your Impact</h2>
-          
+
           <div className={styles.frequencyToggle}>
-            <button className={frequency === 'one-time' ? styles.active : ''} onClick={() => setFrequency('one-time')}>One-Time</button>
-            <button className={frequency === 'monthly' ? styles.active : ''} onClick={() => setFrequency('monthly')}>Monthly Supporter ❤️</button>
-            <button className={frequency === 'annual' ? styles.active : ''} onClick={() => setFrequency('annual')}>Annual</button>
+            <button
+              className={frequency === "one-time" ? styles.active : ""}
+              onClick={() => setFrequency("one-time")}
+            >
+              One-Time
+            </button>
+            <button
+              className={frequency === "monthly" ? styles.active : ""}
+              onClick={() => setFrequency("monthly")}
+            >
+              Monthly Supporter ❤️
+            </button>
+            <button
+              className={frequency === "annual" ? styles.active : ""}
+              onClick={() => setFrequency("annual")}
+            >
+              Annual
+            </button>
           </div>
 
           <div className={styles.impactCards}>
-            {predefinedImpacts.map(item => (
-              <div 
-                key={item.value} 
-                className={`${styles.impactCard} ${!isCustom && amount === item.value ? styles.active : ''}`}
+            {predefinedImpacts.map((item) => (
+              <div
+                key={item.value}
+                className={`${styles.impactCard} ${!isCustom && amount === item.value ? styles.active : ""}`}
                 onClick={() => handleImpactSelect(item.value)}
               >
-                {item.recommended && <div className={styles.badgeRecommended}>Recommended</div>}
+                {item.recommended && (
+                  <div className={styles.badgeRecommended}>Recommended</div>
+                )}
                 <div className={styles.cardIcon}>{item.icon}</div>
                 <div className={styles.cardAmount}>&#8377;{item.value}</div>
                 <div className={styles.cardDesc}>{item.label}</div>
@@ -135,91 +206,175 @@ const DonationWizard = () => {
             <h5 className="text-center mb-3">Or enter a custom amount</h5>
             <div className={styles.customInputWrapper}>
               <span className={styles.currencyPrefix}>&#8377;</span>
-              <input 
-                type="text" 
-                className={styles.customInput} 
-                placeholder="Other Amount" 
-                value={isCustom ? customVal : ''}
+              <input
+                type="text"
+                className={styles.customInput}
+                placeholder="Other Amount"
+                value={isCustom ? customVal : ""}
                 onChange={handleCustomChange}
                 onClick={() => setIsCustom(true)}
               />
             </div>
             <div className={styles.liveImpactMessage}>
-              {amount > 0 && isCustom && `Your donation of ₹${amount} can support ${Math.max(1, Math.floor(amount / 500))} initiatives.`}
+              {amount > 0 &&
+                isCustom &&
+                `Your donation of ₹${amount} can support ${Math.max(1, Math.floor(amount / 500))} initiatives.`}
             </div>
           </div>
 
           <form className={styles.formSection} onSubmit={handleSubmit}>
-            <div className="text-center mb-4" style={{ color: '#0D7A6E', fontWeight: 'bold' }}>
-              All donations to SIAWED are eligible for 80 G & 12 A Income Tax Exemptions.
+            <div
+              className="text-center mb-4"
+              style={{ color: "#0D7A6E", fontWeight: "bold" }}
+            >
+              All donations to SIAWED are eligible for 80 G & 12 A Income Tax
+              Exemptions.
             </div>
-            
+
             <h4 className="mb-4">Donor Information</h4>
             <div className="row g-3 mb-4">
               <div className="col-12 mb-2">
                 <FloatingLabel label="I would like to support...">
-                  <Form.Select value={donationCause} onChange={(e) => setDonationCause(e.target.value)}>
+                  <Form.Select
+                    value={donationCause}
+                    onChange={(e) => setDonationCause(e.target.value)}
+                  >
                     <option value="Social cause">Social cause</option>
-                    <option value="Educate a girl child">Educate a girl child</option>
-                    <option value="Go green initiatives">Go green initiatives</option>
+                    <option value="Educate a girl child">
+                      Educate a girl child
+                    </option>
+                    <option value="Go green initiatives">
+                      Go green initiatives
+                    </option>
                   </Form.Select>
                 </FloatingLabel>
               </div>
               <div className="col-md-6">
                 <FloatingLabel label="Full Name">
-                  <Form.Control type="text" placeholder="Full Name" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} disabled={formData.anonymous} />
+                  <Form.Control
+                    type="text"
+                    placeholder="Full Name"
+                    required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    disabled={formData.anonymous}
+                  />
                 </FloatingLabel>
               </div>
               <div className="col-md-6">
                 <FloatingLabel label="Email Address">
-                  <Form.Control type="email" placeholder="name@example.com" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
+                  <Form.Control
+                    type="email"
+                    placeholder="name@example.com"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                  />
                 </FloatingLabel>
               </div>
               <div className="col-md-6">
                 <FloatingLabel label="Phone Number">
-                  <Form.Control type="tel" placeholder="Phone" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
+                  <Form.Control
+                    type="tel"
+                    placeholder="Phone"
+                    required
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                  />
                 </FloatingLabel>
               </div>
               <div className="col-md-6">
                 <FloatingLabel label="PAN (Optional for Tax Receipt)">
-                  <Form.Control type="text" placeholder="PAN Number" value={formData.pan} onChange={e => setFormData({...formData, pan: e.target.value})} />
+                  <Form.Control
+                    type="text"
+                    placeholder="PAN Number"
+                    value={formData.pan}
+                    onChange={(e) =>
+                      setFormData({ ...formData, pan: e.target.value })
+                    }
+                  />
                 </FloatingLabel>
               </div>
             </div>
-            
-            <Form.Check 
+
+            <Form.Check
               type="switch"
               id="anonymous-switch"
               label="Donate Anonymously"
               className="mb-4"
               checked={formData.anonymous}
-              onChange={e => setFormData({...formData, anonymous: e.target.checked, name: e.target.checked ? 'Anonymous' : ''})}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  anonymous: e.target.checked,
+                  name: e.target.checked ? "Anonymous" : "",
+                })
+              }
             />
 
             <div className="text-center mt-4">
-              <CustomButton type="submit" variant="orange" size="lg" fullWidth={false} disabled={isSubmitting}>
-                {isSubmitting ? <><Spinner size="sm" className="me-2"/> Processing...</> : `Complete Donation of ₹${amount || 0}`}
+              <CustomButton
+                type="submit"
+                variant="orange"
+                size="lg"
+                fullWidth={false}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Spinner size="sm" className="me-2" /> Processing...
+                  </>
+                ) : (
+                  `Complete Donation of ₹${amount || 0}`
+                )}
               </CustomButton>
             </div>
           </form>
-
         </div>
       </CustomContainer>
 
       {/* QR Code Payment Modal */}
-      <Modal show={showQrModal} onHide={() => {}} backdrop="static" keyboard={false} centered>
+      <Modal
+        show={showQrModal}
+        onHide={() => {}}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
         <Modal.Header>
           <Modal.Title>Complete Your Donation</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <p className="mb-4">Please scan the QR code below to complete your generous donation of <strong>₹{amount}</strong>.</p>
-          
-          <div style={{ maxWidth: '300px', margin: '0 auto', border: '1px solid #e5e7eb', padding: '10px', borderRadius: '12px' }}>
-            <img src="/payment-qr.jpeg" alt="Donation QR Code" style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+          <p className="mb-4">
+            Please scan the QR code below to complete your generous donation of{" "}
+            <strong>₹{amount}</strong>.
+          </p>
+
+          <div
+            style={{
+              maxWidth: "300px",
+              margin: "0 auto",
+              border: "1px solid #e5e7eb",
+              padding: "10px",
+              borderRadius: "12px",
+            }}
+          >
+            <img
+              src="/payment-qr.jpeg"
+              alt="Donation QR Code"
+              style={{ width: "100%", height: "auto", borderRadius: "8px" }}
+            />
           </div>
-          
-          <p className="text-muted mt-4" style={{ fontSize: '0.9rem' }}>
-            Once you have completed the payment via your preferred app, please click the button below to confirm.
+
+          <p className="text-muted mt-4" style={{ fontSize: "0.9rem" }}>
+            Once you have completed the payment via your preferred app, please
+            click the button below to confirm.
           </p>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">
@@ -228,7 +383,6 @@ const DonationWizard = () => {
           </CustomButton>
         </Modal.Footer>
       </Modal>
-
     </section>
   );
 };
