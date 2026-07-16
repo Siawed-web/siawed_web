@@ -7,12 +7,11 @@ import "nprogress/nprogress.css";
 import Router, { useRouter } from "next/router";
 import Head from "next/head";
 
-
 import { ToastContainer } from "react-toastify";
 import Layout from "@/components/layout/layout";
 import { FONTS } from "@/styles/fonts";
 import LoadingScreen from "@/components/ui/loading_screen/loading_screen";
-
+import Script from "next/script";
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -37,10 +36,10 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     // Determine if we need to show the loader based on the initial route
     const delay = router.pathname === "/" ? 1400 : 0;
-    
+
     const timer = setTimeout(() => {
       setLoading(false);
-      
+
       // Initialize AOS *after* the loader disappears
       // This ensures animations are visible to the user
       Aos.init({
@@ -76,9 +75,7 @@ export default function App({ Component, pageProps }) {
         {/* Loader is an overlay, layout renders behind it ensuring perfect SEO */}
         {isHome && loading && <LoadingScreen />}
 
-        
-        
-        {router.pathname.startsWith('/admin') ? (
+        {router.pathname.startsWith("/admin") ? (
           <>
             <Component {...pageProps} />
             <ToastContainer position="bottom-right" />
@@ -89,6 +86,21 @@ export default function App({ Component, pageProps }) {
             <ToastContainer position="bottom-right" />
           </Layout>
         )}
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-TMHJ6DTEVP"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-TMHJ6DTEVP');
+        `}
+        </Script>
       </main>
     </>
   );
