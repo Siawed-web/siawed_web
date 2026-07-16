@@ -11,7 +11,8 @@ import {
   GeoAltFill, 
   TelephoneFill, 
   EnvelopeFill, 
-  Globe 
+  Globe, 
+  TwitterX
 } from "react-bootstrap-icons";
 import { Image } from "react-bootstrap";
 
@@ -40,10 +41,11 @@ const Footer = () => {
               Southern Industrial Academy for Women Entrepreneurs Development — creating pathways for women across India to build, grow, and scale successful enterprises through the SIAWED & WENBA ecosystem.
             </p>
             <div className={styles.footerSocial} aria-label="SIAWED social media links">
-              <a href="https://facebook.com/siawed" title="Facebook" target="_blank" rel="noopener noreferrer"><Facebook /></a>
-              <a href="https://instagram.com/siawed" title="Instagram" target="_blank" rel="noopener noreferrer"><Instagram /></a>
-              <a href="https://linkedin.com/company/siawed" title="LinkedIn" target="_blank" rel="noopener noreferrer"><Linkedin /></a>
-              <a href="https://youtube.com/@siawed" title="YouTube" target="_blank" rel="noopener noreferrer"><Youtube /></a>
+              <Link href="https://www.facebook.com/share/1Bqe2vjbM1/" title="Facebook" target="_blank" rel="noopener noreferrer"><Facebook /></Link>
+              <Link href="https://www.instagram.com/siawed_for_women" title="Instagram" target="_blank" rel="noopener noreferrer"><Instagram /></Link>
+              <Link href="https://www.linkedin.com/in/siawed-for-women-727a28a4" title="LinkedIn" target="_blank" rel="noopener noreferrer"><Linkedin /></Link>
+              <Link href="http://www.youtube.com/@SIAWEDNGO" title="YouTube" target="_blank" rel="noopener noreferrer"><Youtube /></Link>
+              <Link href="https://x.com/vanadhid" title="YouTube" target="_blank" rel="noopener noreferrer"><TwitterX /></Link>
             </div>
             {/* WENBA mini in footer */}
             <div className={styles.footerWenba}>

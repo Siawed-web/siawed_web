@@ -57,9 +57,9 @@ const Header = () => {
       <div className={styles.topbar} role="banner">
         <span><GeoAltFill /> 601 &#8220;DEEPA&#8221;, Choolaimedu High Road, Chennai &#8211; 600094</span>
         <div className={styles.topbarRight}>
-          <a href="tel:+914443514334"><TelephoneFill /> 044 4351 4334</a>
-          <a href="https://wa.me/916381814441" target="_blank" rel="noopener noreferrer"><Whatsapp /> +91 63818 14441</a>
-          <a href="mailto:info@siawed.org"><EnvelopeFill /> info@siawed.org</a>
+          <Link href="tel:+914443514334"><TelephoneFill /> 044 4351 4334</Link>
+          <Link href="https://wa.me/916381814441" target="_blank" rel="noopener noreferrer"><Whatsapp /> +91 63818 14441</Link>
+          <Link href="mailto:info@siawed.org"><EnvelopeFill /> info@siawed.org</Link>
          
         </div>
       </div>
